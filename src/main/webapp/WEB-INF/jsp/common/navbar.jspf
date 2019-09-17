@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 20px">
+    <a class="navbar-brand" href="#">College Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/classes">Classes</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/courses">Courses</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/grades">Grades</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/profiles">Profiles</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/students">Students</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/subjects">Subjects</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/teachers">Teachers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
+            </li>
+
+        </ul>
+<%--        <form class="form-inline my-2 my-lg-0">--%>
+<%--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
+<%--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+<%--        </form>--%>
+    </div>
+</nav>

@@ -1,0 +1,55 @@
+Roger,
+
+No Assessment da disciplina Desenvolvimento Java: JEE, você vai colocar em prática as competências
+que você desenvolveu ao longo de toda a disciplina. Seu professor irá informar detalhes do domínio
+do problema de negócios no qual sua aplicação Java Web funcionará.
+
+Você deve construir uma aplicação Java Web dividida em três camadas: modelo, visão e controle,
+utilizando Spring Web MVC para construí-la, JSP para a interface com o usuário, JPA/Hibernate
+para modelagem e construção do banco de dados objeto-relacional. O banco de dados utilizado deve ser o MySQL.
+
+Sua aplicação deve possibilitar o cadastro e autenticação de usuários. De acordo com o domínio
+definido pelo seu professor, sua aplicação deverá implementar campos específicos para o cadastro
+dos usuários.
+
+Quando um novo usuário for cadastrado, sua aplicação deve gravar estas informações em banco de dados.
+
+A seguir, a aplicação deve exibir as informações de nome e e-mail do usuário numa página JSP de
+mensagem de sucesso no cadastro, bem como um link Login.
+
+Quando a opção de Login for selecionada, a aplicação deve exibir um formulário solicitando
+e-mail e senha do usuário, com um botão Realizar Login. A ação Realizar Login deve buscar o e-mail
+informado na base de dados e, caso ele exista, comparar a senha informada com a senha registrada.
+Caso os dados estejam corretos, uma mensagem deve ser exibida, informando que o usuário está autenticado
+no sistema. Do contrário, o formulário de login deve ser reexibido informando que os dados estão incorretos.
+Para realizar uma entrega de maior excelência, implemente também uma funcionalidade de esquecimento de
+senha e/ou funcionalidades de verificação da complexidade das senhas e/ou da sua criptografia no banco
+de dados.
+
+Uma vez que o usuário esteja autenticado, devem ser apresentadas a ele opções, de acordo com o domínio
+ definido, para que ele possa realizar, na aplicação, consulta, inclusão, atualização e exclusão de
+ dados armazenados em um banco de dados. A aplicação deve utilizar o Hibernate para a gerência de dados.
+ Você pode criar classes auxiliares para enriquecer o trabalho.
+
+Além disso, você deve mapear suas funcionalidades de inclusão e de consulta para pelo menos uma
+classe do sistema em web services de escrita (POST) e leitura (GET), para que possam ser consumidos
+por outras aplicações. Você também deve criar uma breve documentação para outros desenvolvedores
+poderem criar aplicações que consumam dados da sua.
+
+Você também deve entregar uma aplicação RESTful auxiliar, criada por você mesmo, que consuma dados
+da sua aplicação principal.
+
+Antes de fazer sua entrega, teste bem sua aplicação, fornecendo evidências em vídeo ou imagens do
+seu funcionamento. (dica: no caso da utilização de vídeos, armazene-os no seu Google Drive de aluno,
+certifique-se de que está com permissão de acesso para qualquer pessoa que possua o link para o arquivo
+e disponibilize tal link na sua entrega para o professor).
+
+Você deve exportar o projeto web em um arquivo. Também devem ser enviados alguns casos de teste com
+prints da tela em um arquivo pdf (caso use vídeos demonstrando a entrega, coloque um link para eles
+no pdf). Não esqueça de enviar uma imagem do modelo lógico e o código do projeto físico do banco no
+MySQL. Também não deixe de enviar a documentação para outros desenvolvedores implementarem aplicações
+RESTful que interagem com a sua aplicação. Submeta tudo em um arquivo .zip pelo moodle.
+
+Antes de fazer sua entrega, reúna todos os arquivos relativos ao seu TP em um único arquivo .zip.
+Utilize seu próprio nome para nomear o arquivo, identificando também o teste correspondente, como
+no exemplo: Nome_sobrenome_DR3_AT.zip.
