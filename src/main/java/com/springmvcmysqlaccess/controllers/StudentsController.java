@@ -33,12 +33,12 @@ public class StudentsController {
         return "students";
     }
 
-//    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
-//    public String showAddClasses(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        m.addAttribute("command", new ClassMdl());
-//        return "addclass";
-//    }
+    @RequestMapping(value = "/addstudent", method = RequestMethod.GET)
+    public String showAddClasses(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", new Student());
+        return "addstudent";
+    }
 //
 //    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
 //    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {

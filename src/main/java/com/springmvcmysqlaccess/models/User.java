@@ -9,18 +9,16 @@ public class User {
     private String password;
     private String email;
     private int profileid_fk;
-    private String isteacher;
 
     public User() {}
 
-    public User(int userid, int enrollment, String name, String password, String email, int profileid_fk, String isteacher) {
+    public User(int userid, int enrollment, String name, String password, String email, int profileid_fk) {
         this.userid = userid;
         this.enrollment = enrollment;
         this.name = name;
         this.password = password;
         this.email = email;
         this.profileid_fk = profileid_fk;
-        this.isteacher = isteacher;
     }
 
     public int getUserid() {
@@ -71,14 +69,6 @@ public class User {
         this.profileid_fk = profileid_fk;
     }
 
-    public String getIsteacher() {
-        return isteacher;
-    }
-
-    public void setIsteacher(String isteacher) {
-        this.isteacher = isteacher;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -88,7 +78,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", profileid_fk=" + profileid_fk +
-                ", isteacher=" + isteacher +
                 '}';
     }
 }

@@ -24,14 +24,11 @@ public class RegisterController {
     public String showRegisterForm(Model m) {
         m.addAttribute("command", new User());
         m.addAttribute("profiles", profileDao.getProfiles());
-        m.addAttribute("isTeacher", false);
         return "registeruser";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUserAsTeacher (@ModelAttribute("user") User user, BindingResult result, Model m) {
-        System.out.println("Binding result" + result);
-        System.out.println("Model" + m);
         User dbUser = userDao.getUserByEmail(user.getEmail());
         if (dbUser==null) {
             userDao.add(user);
@@ -40,6 +37,7 @@ public class RegisterController {
         }
         dbUser.setEmail("");
         m.addAttribute("command", dbUser);
+        m.addAttribute("profiles", profileDao.getProfiles());
         m.addAttribute("error", "E-mail address is already taken.");
         return "registeruser";
     }
