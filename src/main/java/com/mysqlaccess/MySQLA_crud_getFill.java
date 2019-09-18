@@ -16,7 +16,7 @@ public class MySQLA_crud_getFill {
 
         // ---> If no connection has been established, abort.
         if (!MySQLA_validators.hasConnection(conn)) {
-            MySQLA_loggers.logError("Unable to execute 'GETFILL' command because there is no connection to '" +
+            MySQLA_loggers.logError("GETFILL - Unable to execute 'GETFILL' command because there is no connection to '" +
                     database + "' database.");
             if (callback != null) callback.onFailure();
             return returnData;
@@ -25,7 +25,7 @@ public class MySQLA_crud_getFill {
         // ---> If connection is invalid, attempt to reconnect, abort if unable;
         conn = MySQLA_connection.manageConnectionHealth(conn, config);
         if (conn == null) {
-            MySQLA_loggers.logError("GET - Unable to execute command because the connection to '" +
+            MySQLA_loggers.logError("GETFILL - Unable to execute command because the connection to '" +
                     database + "' database has expired and reconnection failed.");
             if (callback != null) callback.onFailure();
             return null;
@@ -33,7 +33,7 @@ public class MySQLA_crud_getFill {
 
         // ---> If no table is selected, abort.
         if (!MySQLA_validators.isTableSelected(table)) {
-            MySQLA_loggers.logError("No table selected on database '" + database + "'. Use setTable(..tablename..) " +
+            MySQLA_loggers.logError("GETFILL - No table selected on database '" + database + "'. Use setTable(..tablename..) " +
                     "before executing mysqlaccess commands.");
             if (callback != null) callback.onFailure();
             return returnData;
@@ -69,13 +69,13 @@ public class MySQLA_crud_getFill {
 
         // ---> If unable to fetch details for one or more tables, abort.
         if (!MySQLA_validators.hasFetchedTableDetails(database, table)) {
-            MySQLA_loggers.logError("Could not fetch table details from database.");
+            MySQLA_loggers.logError("GETFILL - Could not fetch table details from database.");
             if (callback != null) callback.onFailure();
             return returnData;
         }
         for (String tableToJoinName : tablesToJoin) {
             if (!MySQLA_validators.hasFetchedTableDetails(database, tableToJoinName)) {
-                MySQLA_loggers.logError("Could not fetch table details from database.");
+                MySQLA_loggers.logError("GETFILL - Could not fetch table details from database.");
                 if (callback != null) callback.onFailure();
                 return returnData;
             }
@@ -105,11 +105,11 @@ public class MySQLA_crud_getFill {
         ResultSet resultSet = null;
         try {
             Statement st = conn.createStatement();
-            MySQLA_loggers.logInfo("Executing getFill query at '" + table +"': " + query);
+            MySQLA_loggers.logInfo("GETFILL - Executing getFill query at '" + table +"': " + query);
             resultSet = st.executeQuery(query);
 
         } catch (SQLException e) {
-            MySQLA_loggers.logError("Unable to create connection statement.");
+            MySQLA_loggers.logError("GETFILL - Unable to create connection statement.");
             if (callback != null) callback.onFailure();
             e.printStackTrace();
             return returnData;

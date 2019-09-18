@@ -32,19 +32,6 @@ public class MySQLA_crud_getMain {
             return null;
         }
 
-        boolean isValid = false;
-        try {
-            isValid = conn.isValid(3);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if(isValid) {
-            System.out.println("connection is valid");
-        } else {
-            System.out.println("connection is invalid");
-        }
-
         // ---> If no table is selected, abort.
         if (!MySQLA_validators.isTableSelected(table)) {
             MySQLA_loggers.logError("GET - No table selected on database '" + database

@@ -3,12 +3,9 @@ package com.mysqlaccess;
 import com.mysqlaccess.models.MySQLAConfig;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MySQLA_connection {
 
@@ -22,7 +19,17 @@ public class MySQLA_connection {
             "?useTimezone=true&serverTimezone=UTC";
 
     private static Map<Connection, Long> lastMeasurement = new HashMap<>();
+    private static List<Connection> connections = new ArrayList<>();
     private static final Long intervalInSeconds = 30l;
+    private static Thread checkerThread = null;
+    private static final int checkIntervalinSecs = 60;
+
+    static {
+        runCheckerThread();
+        Runtime.getRuntime().addShutdownHook(new Thread( () -> {
+            killConnections();
+        }));
+    }
 
     public static Connection getConnection(MySQLAConfig config) {
 
@@ -34,8 +41,10 @@ public class MySQLA_connection {
             conn = DriverManager.getConnection(url, config.user, config.password);
             MySQLA_loggers.logInfo("CONNECTION - Successfully created connection to database " + config.database
                     + " @ " + config.ip + ":" + config.port + " with credentials " + config.user
-                    + " | " + config.password);
+                    + " | " + config.password + " || " + java.time.LocalDateTime.now().toString().replace("T",
+                    " "));
             lastMeasurement.put(conn, new Date().getTime());
+            connections.add(conn);
 
         } catch (SQLException e) {
             MySQLA_loggers.logError("CONNECTION - Unable to connect to database " + config.database + " @ "
@@ -50,42 +59,88 @@ public class MySQLA_connection {
 
     }
 
-    public static Connection manageConnectionHealth(Connection conn, MySQLAConfig config) {
-        if (conn == null) return conn;
-        if (lastMeasurement.containsKey(conn)) {
-//            System.out.println("Delay: " + (new Date().getTime() - lastMeasurement.get(conn) + " | intervalInSecs: " + intervalInSeconds*1000));
-            if(new Date().getTime() - lastMeasurement.get(conn) > (intervalInSeconds*1000)) {
-                boolean isConnectionValid = false;
+    private static void runCheckerThread() {
+        checkerThread = new Thread( () -> {
+            while (true) {
                 try {
-                    isConnectionValid = conn.isValid(5);
-                } catch (SQLException e) {
-                    MySQLA_loggers.logError(e.getMessage());
+                    Thread.sleep(checkIntervalinSecs*1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                if (!isConnectionValid) {
-                    MySQLA_loggers.logInfo("CONNECTION - Checking connection health: EXPIRED. Attempting to reconnect...");
-                    lastMeasurement.remove(conn);
-                    conn = null;
-                    conn = getConnection(config);
+                MySQLA_loggers.logInfo("CONNECTION - Checking connections status...");
+                int aliveConnections = 0;
+                synchronized (connections) {
+                    for (Connection c : connections) {
+                        boolean isConnectionValid = false;
+                        try {
+                            isConnectionValid = c.isValid(5);
+                        } catch (SQLException e) {
+                            MySQLA_loggers.logError("CONNECTION - Connection error: " + e.getMessage());
+                        }
+                        if (isConnectionValid) aliveConnections++;
+                    }
                 }
-                if (conn == null) {
-                    MySQLA_loggers.logError("CONNECTION - Unable to reconnect.");
-                    return conn;
+                if (aliveConnections == connections.size()) {
+                    MySQLA_loggers.logInfo("CONNECTION - " + aliveConnections + "/" + connections.size()
+                            + " connections healthy.");
                 }
-                isConnectionValid = false;
-                try {
-                    isConnectionValid = conn.isValid(5);
-                } catch (SQLException e) {
-                    MySQLA_loggers.logError(e.getMessage());
+                else {
+                    MySQLA_loggers.logError("CONNECTION - " + (connections.size()-aliveConnections) + "/"
+                            + connections.size() + " connections broken!");
                 }
-                if (!isConnectionValid) {
-                    MySQLA_loggers.logInfo("CONNECTION - Unable to reconnect. New connection is blocked.");
-                    return conn;
-                }
-                MySQLA_loggers.logInfo("CONNECTION - Checking connection health: VALID.");
             }
-            lastMeasurement.replace(conn, new Date().getTime());
-            return conn;
+        });
+        checkerThread.setDaemon(true);
+        checkerThread.start();
+    }
+
+    private static void killConnections() {
+        for (Connection c : connections) {
+            try {
+                MySQLA_loggers.logInfo("CONNECTION - Killing connection.");
+                c.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public static Connection manageConnectionHealth(Connection conn, MySQLAConfig config) {
         return conn;
+//        if (conn == null) return conn;
+//        if (lastMeasurement.containsKey(conn)) {
+//            if(new Date().getTime() - lastMeasurement.get(conn) > (intervalInSeconds*1000)) {
+//                boolean isConnectionValid = false;
+//                try {
+//                    isConnectionValid = conn.isValid(5);
+//                } catch (SQLException e) {
+//                    MySQLA_loggers.logError(e.getMessage());
+//                }
+//                if (!isConnectionValid) {
+//                    MySQLA_loggers.logInfo("CONNECTION - Checking connection health: EXPIRED. Attempting to reconnect...");
+//                    lastMeasurement.remove(conn);
+//                    conn = null;
+//                    conn = getConnection(config);
+//                }
+//                if (conn == null) {
+//                    MySQLA_loggers.logError("CONNECTION - Unable to reconnect.");
+//                    return conn;
+//                }
+//                isConnectionValid = false;
+//                try {
+//                    isConnectionValid = conn.isValid(5);
+//                } catch (SQLException e) {
+//                    MySQLA_loggers.logError(e.getMessage());
+//                }
+//                if (!isConnectionValid) {
+//                    MySQLA_loggers.logInfo("CONNECTION - Unable to reconnect. New connection is blocked.");
+//                    return conn;
+//                }
+//                MySQLA_loggers.logInfo("CONNECTION - Checking connection health: VALID.");
+//            }
+//            lastMeasurement.replace(conn, new Date().getTime());
+//            return conn;
+//        }
+//        return conn;
     }
 }

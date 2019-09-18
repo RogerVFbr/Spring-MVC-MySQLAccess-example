@@ -13,7 +13,7 @@ public class DBConfig {
     }
 
     public static MySQLAConfig getDBConfig() {
-        return AWS;
+        return AWS_JAVAEE;
     }
 
     private static MySQLAConfig LOCAL = new MySQLAConfig(

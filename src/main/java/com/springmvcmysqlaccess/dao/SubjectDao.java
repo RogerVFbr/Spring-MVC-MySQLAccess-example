@@ -1,34 +1,38 @@
 package com.springmvcmysqlaccess.dao;
 
 import com.mysqlaccess.MySQLAccess;
-import com.springmvcmysqlaccess.config.DBConfig;
+import com.springmvcmysqlaccess.config.Res;
 import com.springmvcmysqlaccess.models.Subject;
 
 import java.util.List;
 
 public class SubjectDao {
 
-    private MySQLAccess table = new MySQLAccess(DBConfig.AWS_JAVAEE, "subject");
+    private MySQLAccess db = DBAccess.getAccess();
     private String primaryKeyColumnName = "subjectid";
 
     public Object add(Subject p) {
-        return table.add(p);
+        db.setTable(Res.SUBJECTS_TABLE);
+        return db.add(p);
     }
 
     public int update(Subject p) {
-        return table.update(p);
+        db.setTable(Res.SUBJECTS_TABLE);
+        return db.update(p);
     }
 
     public int delete(int id) {
-        return table.delete(primaryKeyColumnName + "=" + id);
+        db.setTable(Res.SUBJECTS_TABLE);
+        return db.delete(Res.SUBJECTS_TABLE_PK + "=" + id);
     }
 
     public Subject getSubjectById(int id) {
-        return table.getSingleItem(Subject.class,
-                primaryKeyColumnName + "=" + id);
+        db.setTable(Res.SUBJECTS_TABLE);
+        return db.getSingleItem(Subject.class, Res.SUBJECTS_TABLE_PK + "=" + id);
     }
 
     public List<Subject> getSubjects() {
-        return table.get(Subject.class);
+        db.setTable(Res.SUBJECTS_TABLE);
+        return db.get(Subject.class);
     }
 }

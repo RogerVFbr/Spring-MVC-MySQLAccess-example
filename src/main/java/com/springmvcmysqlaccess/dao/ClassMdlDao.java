@@ -1,34 +1,37 @@
 package com.springmvcmysqlaccess.dao;
 
 import com.mysqlaccess.MySQLAccess;
-import com.springmvcmysqlaccess.config.DBConfig;
+import com.springmvcmysqlaccess.config.Res;
 import com.springmvcmysqlaccess.models.ClassMdl;
 
 import java.util.List;
 
 public class ClassMdlDao {
 
-    private MySQLAccess table = new MySQLAccess(DBConfig.AWS_JAVAEE, "class");
-    private String primaryKeyColumnName = "classid";
+    private MySQLAccess db = DBAccess.getAccess();
 
     public Object add(ClassMdl p) {
-        return table.add(p);
+        db.setTable(Res.CLASSES_TABLE);
+        return db.add(p);
     }
 
     public int update(ClassMdl p) {
-        return table.update(p);
+        db.setTable(Res.CLASSES_TABLE);
+        return db.update(p);
     }
 
     public int delete(int id) {
-        return table.delete(primaryKeyColumnName + "=" + id);
+        db.setTable(Res.CLASSES_TABLE);
+        return db.delete(Res.CLASSES_TABLE_PK + "=" + id);
     }
 
     public ClassMdl getClassById(int id) {
-        return table.getSingleItem(ClassMdl.class,
-                primaryKeyColumnName + "=" + id);
+        db.setTable(Res.CLASSES_TABLE);
+        return db.getSingleItem(ClassMdl.class, Res.CLASSES_TABLE_PK + "=" + id);
     }
 
     public List<ClassMdl> getClasses() {
-        return table.get(ClassMdl.class);
+        db.setTable(Res.CLASSES_TABLE);
+        return db.get(ClassMdl.class);
     }
 }
