@@ -1,34 +1,40 @@
 package com.springmvcmysqlaccess.models;
 
-
-public class User {
-    private int userid;
+public class RegisterStudentViewModel extends User{
+    private String birthdate;
+    private int courseid_fk;
     private int enrollment;
     private String name;
     private String password;
     private String email;
     private int profileid_fk;
-    private String profilename;
 
+    public RegisterStudentViewModel() {}
 
-    public User() {}
-
-    public User(int userid, int enrollment, String name, String password, String email, int profileid_fk, String profilename) {
-        this.userid = userid;
+    public RegisterStudentViewModel(String birthdate, int courseid_fk, int enrollment, String name, String password, String email, int profileid_fk) {
+        this.birthdate = birthdate;
+        this.courseid_fk = courseid_fk;
         this.enrollment = enrollment;
         this.name = name;
         this.password = password;
         this.email = email;
         this.profileid_fk = profileid_fk;
-        this.profilename = profilename;
     }
 
-    public int getUserid() {
-        return userid;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public int getCourseid_fk() {
+        return courseid_fk;
+    }
+
+    public void setCourseid_fk(int courseid_fk) {
+        this.courseid_fk = courseid_fk;
     }
 
     public int getEnrollment() {
@@ -71,24 +77,16 @@ public class User {
         this.profileid_fk = profileid_fk;
     }
 
-    public String getProfilename() {
-        return profilename;
-    }
-
-    public void setProfilename(String profilename) {
-        this.profilename = profilename;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
-                "userid=" + userid +
+        return "RegisterStudentViewModel{" +
+                "birthdate='" + birthdate + '\'' +
+                ", courseid_fk=" + courseid_fk +
                 ", enrollment=" + enrollment +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", profileid_fk=" + profileid_fk +
-                ", profilename=" + profilename +
                 '}';
     }
 }

@@ -15,20 +15,15 @@
     <h2 style="margin-bottom: 20px">Profiles</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Name</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Name</th></tr>
         <c:forEach var="prof" items="${list}">
             <tr>
                 <td>${prof.profileid}</td>
                 <td>${prof.profilename}</td>
-                <td>
-                    <a href="updateprofile/${prof.profileid}" class="btn btn-warning">Edit</a>
-                    <a href="deleteprofile/${prof.profileid}" class="btn btn-danger">Delete</a>
-                </td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
-    <a href="${pageContext.request.contextPath}/addprofile" class="btn btn-success" style="float: right">Add profile</a>
+
 </div>
 
 

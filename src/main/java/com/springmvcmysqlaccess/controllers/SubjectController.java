@@ -1,7 +1,7 @@
 package com.springmvcmysqlaccess.controllers;
 
-import com.springmvcmysqlaccess.dao.*;
-import com.springmvcmysqlaccess.models.*;
+import com.springmvcmysqlaccess.dao.SubjectDao;
+import com.springmvcmysqlaccess.models.Subject;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,47 +19,52 @@ public class SubjectController {
     @Autowired
     SubjectDao dao;
 
+    // ---> Get all
     @RequestMapping(value = "/subjects", method = RequestMethod.GET)
-    public String showSubject(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
+    public String showSubjects(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
         List<Subject> subjects = dao.getSubjects();
         m.addAttribute("list", subjects);
         return "subjects";
     }
 
-//    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
-//    public String showAddClasses(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        m.addAttribute("command", new ClassMdl());
-//        return "addclass";
-//    }
-//
-//    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
-//    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.add(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/updateclass/{id}", method = RequestMethod.GET)
-//    public String showUpdateClass(@PathVariable int id, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        ClassMdl classMdl = dao.getClassById(id);
-//        m.addAttribute("command", classMdl);
-//        return "updateclass";
-//    }
-//
-//    @RequestMapping(value = "/updateclass", method = RequestMethod.POST)
-//    public String updateClass(@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.update(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/deleteclass/{id}", method = RequestMethod.GET)
-//    public String deleteClass(@PathVariable int id) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.delete(id);
-//        return "redirect:/classes";
-//    }
+    // ---> Add (GET)
+    @RequestMapping(value = "/addsubject", method = RequestMethod.GET)
+    public String showAddSubjects(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", new Subject());
+        return "addsubject";
+    }
+
+    // ---> Add (POST)
+    @RequestMapping(value = "/addsubject", method = RequestMethod.POST)
+    public String addSubject (@ModelAttribute("subject") Subject subject, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.add(subject);
+        return "redirect:/subjects";
+    }
+
+    // ---> Update (GET)
+    @RequestMapping(value = "/updatesubject/{id}", method = RequestMethod.GET)
+    public String showUpdateSubject(@PathVariable int id, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", dao.getSubjectById(id));
+        return "updatesubject";
+    }
+
+    // ---> Update (POST)
+    @RequestMapping(value = "/updatesubject", method = RequestMethod.POST)
+    public String updateSubject(@ModelAttribute("subject") Subject subject, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.update(subject);
+        return "redirect:/subjects";
+    }
+
+    // ---> Delete
+    @RequestMapping(value = "/deletesubject/{id}", method = RequestMethod.GET)
+    public String deleteSubject(@PathVariable int id) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.delete(id);
+        return "redirect:/subjects";
+    }
 }

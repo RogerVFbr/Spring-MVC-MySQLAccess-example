@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Courses</title>
+    <title>Users</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -12,18 +12,21 @@
 
 <div class="container">
 
-    <h2 style="margin-bottom: 20px">Courses</h2>
+    <h2 style="margin-bottom: 20px">Users</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Name</th></tr>
-        <c:forEach var="course" items="${list}">
+        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th></tr>
+        <c:forEach var="user" items="${list}">
             <tr>
-                <td>${course.courseid}</td>
-                <td>${course.coursename}</td>
+                <td>${user.userid}</td>
+                <td>${user.enrollment}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.profilename}</td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
+
 </div>
 
 
@@ -32,5 +35,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
 
 

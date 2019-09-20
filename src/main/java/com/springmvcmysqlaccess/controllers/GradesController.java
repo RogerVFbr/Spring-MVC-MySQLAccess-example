@@ -1,8 +1,6 @@
 package com.springmvcmysqlaccess.controllers;
 
-import com.springmvcmysqlaccess.dao.CourseDao;
 import com.springmvcmysqlaccess.dao.GradeDao;
-import com.springmvcmysqlaccess.models.Course;
 import com.springmvcmysqlaccess.models.Grade;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,47 +19,52 @@ public class GradesController {
     @Autowired
     GradeDao dao;
 
+    // ---> Get all
     @RequestMapping(value = "/grades", method = RequestMethod.GET)
     public String showGrades(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
+        if (!Auth.isLoggedIn()) return "redirect:/login";
         List<Grade> grades = dao.getGrades();
         m.addAttribute("list", grades);
         return "grades";
     }
 
-//    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
-//    public String showAddClasses(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        m.addAttribute("command", new ClassMdl());
-//        return "addclass";
-//    }
-//
-//    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
-//    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.add(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/updateclass/{id}", method = RequestMethod.GET)
-//    public String showUpdateClass(@PathVariable int id, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        ClassMdl classMdl = dao.getClassById(id);
-//        m.addAttribute("command", classMdl);
-//        return "updateclass";
-//    }
-//
-//    @RequestMapping(value = "/updateclass", method = RequestMethod.POST)
-//    public String updateClass(@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.update(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/deleteclass/{id}", method = RequestMethod.GET)
-//    public String deleteClass(@PathVariable int id) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.delete(id);
-//        return "redirect:/classes";
-//    }
+    // ---> Add (GET)
+    @RequestMapping(value = "/addgrade", method = RequestMethod.GET)
+    public String showAddGrades(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", new Grade());
+        return "addgrade";
+    }
+
+    // ---> Add (POST)
+    @RequestMapping(value = "/addgrade", method = RequestMethod.POST)
+    public String addGrade (@ModelAttribute("grade") Grade grade, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.add(grade);
+        return "redirect:/grades";
+    }
+
+    // ---> Update (GET)
+    @RequestMapping(value = "/updategrade/{id}", method = RequestMethod.GET)
+    public String showUpdategrade(@PathVariable int id, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", dao.getGradeById(id));
+        return "updategrade";
+    }
+
+    // ---> Update (POST)
+    @RequestMapping(value = "/updategrade", method = RequestMethod.POST)
+    public String updategrade(@ModelAttribute("grade") Grade grade, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.update(grade);
+        return "redirect:/grades";
+    }
+
+    // ---> Delete
+    @RequestMapping(value = "/deletegrade/{id}", method = RequestMethod.GET)
+    public String deletegrade(@PathVariable int id) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.delete(id);
+        return "redirect:/grades";
+    }
 }

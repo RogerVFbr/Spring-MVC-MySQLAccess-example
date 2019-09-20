@@ -6,15 +6,17 @@ public class Grade {
     private float av2;
     private int studentid_fk;
     private int classid_fk;
+    private String classcode;
 
     public Grade() {}
 
-    public Grade(int gradeid, Float av1, Float av2, int studentid_fk, int classid_fk) {
+    public Grade(int gradeid, Float av1, Float av2, int studentid_fk, int classid_fk, String classcode) {
         this.gradeid = gradeid;
         this.av1 = av1;
         this.av2 = av2;
         this.studentid_fk = studentid_fk;
         this.classid_fk = classid_fk;
+        this.classcode = classcode;
     }
 
     public int getGradeid() {
@@ -57,6 +59,14 @@ public class Grade {
         this.classid_fk = classid_fk;
     }
 
+    public String getClasscode() {
+        return classcode;
+    }
+
+    public void setClasscode(String classcode) {
+        this.classcode = classcode;
+    }
+
     @Override
     public String toString() {
         return "Grade{" +
@@ -65,6 +75,7 @@ public class Grade {
                 ", av2=" + av2 +
                 ", studentid_fk=" + studentid_fk +
                 ", classid_fk=" + classid_fk +
+                ", classcode=" + classcode +
                 '}';
     }
 }

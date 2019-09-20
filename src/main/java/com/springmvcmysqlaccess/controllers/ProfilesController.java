@@ -1,10 +1,6 @@
 package com.springmvcmysqlaccess.controllers;
 
-import com.springmvcmysqlaccess.dao.CourseDao;
-import com.springmvcmysqlaccess.dao.GradeDao;
 import com.springmvcmysqlaccess.dao.ProfileDao;
-import com.springmvcmysqlaccess.models.Course;
-import com.springmvcmysqlaccess.models.Grade;
 import com.springmvcmysqlaccess.models.Profile;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,47 +19,52 @@ public class ProfilesController {
     @Autowired
     ProfileDao dao;
 
+    // ---> Get all
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String showProfiles(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
+        if (!Auth.isLoggedIn()) return "redirect:/login";
         List<Profile> profiles = dao.getProfiles();
         m.addAttribute("list", profiles);
         return "profiles";
     }
 
-//    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
-//    public String showAddClasses(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        m.addAttribute("command", new ClassMdl());
-//        return "addclass";
-//    }
-//
-//    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
-//    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.add(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/updateclass/{id}", method = RequestMethod.GET)
-//    public String showUpdateClass(@PathVariable int id, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        ClassMdl classMdl = dao.getClassById(id);
-//        m.addAttribute("command", classMdl);
-//        return "updateclass";
-//    }
-//
-//    @RequestMapping(value = "/updateclass", method = RequestMethod.POST)
-//    public String updateClass(@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.update(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/deleteclass/{id}", method = RequestMethod.GET)
-//    public String deleteClass(@PathVariable int id) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.delete(id);
-//        return "redirect:/classes";
-//    }
+    // ---> Add (GET)
+    @RequestMapping(value = "/addprofile", method = RequestMethod.GET)
+    public String showAddProfiles(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", new Profile());
+        return "addprofile";
+    }
+
+    // ---> Add (POST)
+    @RequestMapping(value = "/addprofile", method = RequestMethod.POST)
+    public String addProfile (@ModelAttribute("profile") Profile profile, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.add(profile);
+        return "redirect:/profiles";
+    }
+
+    // ---> Update (GET)
+    @RequestMapping(value = "/updateprofile/{id}", method = RequestMethod.GET)
+    public String showUpdateProfile(@PathVariable int id, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", dao.getProfileById(id));
+        return "updateprofile";
+    }
+
+    // ---> Update (POST)
+    @RequestMapping(value = "/updateprofile", method = RequestMethod.POST)
+    public String updateProfile(@ModelAttribute("profile") Profile profile, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.update(profile);
+        return "redirect:/profiles";
+    }
+
+    // ---> Delete
+    @RequestMapping(value = "/deleteprofile/{id}", method = RequestMethod.GET)
+    public String deleteProfile(@PathVariable int id) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.delete(id);
+        return "redirect:/profiles";
+    }
 }

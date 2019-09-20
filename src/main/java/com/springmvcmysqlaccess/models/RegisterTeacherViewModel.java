@@ -1,42 +1,40 @@
 package com.springmvcmysqlaccess.models;
 
-
-public class User {
-    private int userid;
-    private int enrollment;
+public class RegisterTeacherViewModel extends User {
+    private String title;
+    private Integer userid_fk;
     private String name;
+    private int enrollment;
     private String password;
     private String email;
     private int profileid_fk;
-    private String profilename;
 
+    public RegisterTeacherViewModel() {}
 
-    public User() {}
-
-    public User(int userid, int enrollment, String name, String password, String email, int profileid_fk, String profilename) {
-        this.userid = userid;
-        this.enrollment = enrollment;
+    public RegisterTeacherViewModel(String title, Integer userid_fk, String name, int enrollment, String password, String email, int profileid_fk) {
+        this.title = title;
+        this.userid_fk = userid_fk;
         this.name = name;
+        this.enrollment = enrollment;
         this.password = password;
         this.email = email;
         this.profileid_fk = profileid_fk;
-        this.profilename = profilename;
     }
 
-    public int getUserid() {
-        return userid;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getEnrollment() {
-        return enrollment;
+    public Integer getUserid_fk() {
+        return userid_fk;
     }
 
-    public void setEnrollment(int enrollment) {
-        this.enrollment = enrollment;
+    public void setUserid_fk(Integer userid_fk) {
+        this.userid_fk = userid_fk;
     }
 
     public String getName() {
@@ -45,6 +43,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getEnrollment() {
+        return enrollment;
+    }
+
+    public void setEnrollment(int enrollment) {
+        this.enrollment = enrollment;
     }
 
     public String getPassword() {
@@ -71,24 +77,16 @@ public class User {
         this.profileid_fk = profileid_fk;
     }
 
-    public String getProfilename() {
-        return profilename;
-    }
-
-    public void setProfilename(String profilename) {
-        this.profilename = profilename;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
-                "userid=" + userid +
-                ", enrollment=" + enrollment +
+        return "RegisterTeacherViewModel{" +
+                "title='" + title + '\'' +
+                ", userid_fk=" + userid_fk +
                 ", name='" + name + '\'' +
+                ", enrollment=" + enrollment +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", profileid_fk=" + profileid_fk +
-                ", profilename=" + profilename +
                 '}';
     }
 }

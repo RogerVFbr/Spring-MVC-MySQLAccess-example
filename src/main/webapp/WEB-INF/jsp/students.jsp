@@ -15,22 +15,17 @@
     <h2 style="margin-bottom: 20px">Students</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Birth date</th><th>Course</th><th>User</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Birth date</th><th>Course</th><th>User</th></tr>
         <c:forEach var="stud" items="${list}">
             <tr>
                 <td>${stud.studentid}</td>
                 <td>${stud.birthdate}</td>
-                <td>${stud.courseid_fk}</td>
-                <td>${stud.userid_fk}</td>
-                <td>
-                    <a href="updatestudent/${stud.studentid}" class="btn btn-warning">Edit</a>
-                    <a href="deletestudent/${stud.studentid}" class="btn btn-danger">Delete</a>
-                </td>
+                <td>${stud.coursename}</td>
+                <td>${stud.name}</td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
-    <a href="${pageContext.request.contextPath}/addstudent" class="btn btn-success" style="float: right">Add student</a>
+
 </div>
 
 

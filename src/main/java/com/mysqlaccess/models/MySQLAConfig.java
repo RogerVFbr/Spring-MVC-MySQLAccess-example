@@ -1,5 +1,7 @@
 package com.mysqlaccess.models;
 
+import java.util.Objects;
+
 public class MySQLAConfig {
 
     public String ip;
@@ -16,5 +18,22 @@ public class MySQLAConfig {
         this.database = database;
         this.user = user;
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MySQLAConfig that = (MySQLAConfig) o;
+        return port == that.port &&
+                ip.equals(that.ip) &&
+                database.equals(that.database) &&
+                user.equals(that.user) &&
+                password.equals(that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ip, port, database, user, password);
     }
 }

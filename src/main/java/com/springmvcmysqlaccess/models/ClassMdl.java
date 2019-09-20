@@ -6,15 +6,19 @@ public class ClassMdl {
     private String classroom;
     private int subjectid_fk;
     private int teacherid_fk;
+    private String subjectname;
+    private String title;
 
     public ClassMdl() {}
 
-    public ClassMdl(int classid, String classcode, String classroom, int subjectid_fk, int teacherid_fk) {
+    public ClassMdl(int classid, String classcode, String classroom, int subjectid_fk, int teacherid_fk, String subjectname, String title) {
         this.classid = classid;
         this.classcode = classcode;
         this.classroom = classroom;
         this.subjectid_fk = subjectid_fk;
         this.teacherid_fk = teacherid_fk;
+        this.subjectname = subjectname;
+        this.title = title;
     }
 
     public int getClassid() {
@@ -57,6 +61,22 @@ public class ClassMdl {
         this.teacherid_fk = teacherid_fk;
     }
 
+    public String getSubjectname() {
+        return subjectname;
+    }
+
+    public void setSubjectname(String subjectname) {
+        this.subjectname = subjectname;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "ClassMdl{" +
@@ -65,6 +85,8 @@ public class ClassMdl {
                 ", classroom='" + classroom + '\'' +
                 ", subjectid_fk=" + subjectid_fk +
                 ", teacherid_fk=" + teacherid_fk +
+                ", subjectname=" + subjectname +
+                ", title=" + title +
                 '}';
     }
 }

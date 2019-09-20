@@ -21,9 +21,13 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="float: left">Login</button>
-            <a href="${pageContext.request.contextPath}/register" class="btn btn-success" style="float: right">Register</a>
+            <div style="float: right">
+                <a href="${pageContext.request.contextPath}/registerstudent" class="btn btn-success">Register student</a>
+                <a href="${pageContext.request.contextPath}/registerteacher" class="btn btn-success">Register teacher</a>
+            </div>
+
         </div>
-        <div style="clear: both"></div  >
+        <div style="clear: both"></div>
 
     </form:form>
     <c:if test="${not empty error}">

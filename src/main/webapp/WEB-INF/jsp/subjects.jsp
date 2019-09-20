@@ -15,22 +15,17 @@
     <h2 style="margin-bottom: 20px">Subjects</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Name</th><th>Code</th><th>Course</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Name</th><th>Code</th><th>Course</th></tr>
         <c:forEach var="subj" items="${list}">
             <tr>
                 <td>${subj.subjectid}</td>
                 <td>${subj.subjectname}</td>
                 <td>${subj.subjectcode}</td>
                 <td>${subj.courseid_fk}</td>
-                <td>
-                    <a href="updatesubject/${subj.subjectid}" class="btn btn-warning">Edit</a>
-                    <a href="deletesubject/${subj.subjectid}" class="btn btn-danger">Delete</a>
-                </td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
-    <a href="${pageContext.request.contextPath}/addsubject" class="btn btn-success" style="float: right">Add subject</a>
+
 </div>
 
 

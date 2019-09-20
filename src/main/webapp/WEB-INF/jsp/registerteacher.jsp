@@ -10,11 +10,23 @@
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
     <h2 style="margin-bottom: 20px">Register teacher</h2>
-    <form:form method="post" action="register">
+    <form:form method="post" action="registerteacher">
+
         <div class="form-group">
             <label for="name">Name:</label>
             <form:input path="name" type="text" class="form-control" id="name" required="required"/>
         </div>
+
+        <div class="form-group">
+            <label for="enrollment">Enrollment:</label>
+            <form:input path="enrollment" type="number" class="form-control" id="enrollment" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <form:input path="title" type="text" class="form-control" id="title" required="required"/>
+        </div>
+
         <div class="form-group">
             <label for="pwd">Password:</label>
             <form:input path="password" type="password" class="form-control" id="pwd" required="required"/>
@@ -25,6 +37,7 @@
             <form:input path="email" type="email" class="form-control" id="email" required="required"/>
         </div>
 
+
         <div class="form-group">
             <label for="profile">Profile:</label>
             <form:select path="profileid_fk" id="profile" class="form-control">
@@ -32,14 +45,8 @@
             </form:select>
         </div>
 
-        testeeeeeeeeee
-
-        <div class="form-group">
-            <label for="type">Type:</label>
-            <form:input type="checkbox" path="isteacher" value="Bike" id="type"/>Are you a teacher?<br>
-        </div>
-
         <button type="submit" class="btn btn-primary">Register</button>
+
     </form:form>
     <c:if test="${not empty error}">
         <div class="alert alert-danger" role="alert">${error}</div>

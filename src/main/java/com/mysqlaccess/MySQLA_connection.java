@@ -9,18 +9,18 @@ import java.util.*;
 
 public class MySQLA_connection {
 
-    //        private static final String serverTimeZone =
+//    private static final String serverTimeZone =
 //                "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
 //    private static final String serverTimeZone =
 //            "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false";
+//    private static Map<Connection, Long> lastMeasurement = new HashMap<>();
+//    private static List<Connection> connections = new ArrayList<>();
+//    private static final Long intervalInSeconds = 30l;
 
     private static final String serverTimeZone =
             "?useTimezone=true&serverTimezone=UTC";
 
-    private static Map<Connection, Long> lastMeasurement = new HashMap<>();
-    private static List<Connection> connections = new ArrayList<>();
-    private static final Long intervalInSeconds = 30l;
+    private static Map<MySQLAConfig, Connection> connectionsByConfig = new HashMap<>();
     private static Thread checkerThread = null;
     private static final int checkIntervalinSecs = 60;
 
@@ -33,6 +33,8 @@ public class MySQLA_connection {
 
     public static Connection getConnection(MySQLAConfig config) {
 
+        if (connectionsByConfig.containsKey(config)) return connectionsByConfig.get(config);
+
         Connection conn = null;
         String url = "jdbc:mysql://" + config.ip + ":" + config.port + "/" + config.database + serverTimeZone;
 
@@ -43,8 +45,8 @@ public class MySQLA_connection {
                     + " @ " + config.ip + ":" + config.port + " with credentials " + config.user
                     + " | " + config.password + " || " + java.time.LocalDateTime.now().toString().replace("T",
                     " "));
-            lastMeasurement.put(conn, new Date().getTime());
-            connections.add(conn);
+
+            connectionsByConfig.put(config, conn);
 
         } catch (SQLException e) {
             MySQLA_loggers.logError("CONNECTION - Unable to connect to database " + config.database + " @ "
@@ -56,7 +58,6 @@ public class MySQLA_connection {
         }
 
         return conn;
-
     }
 
     private static void runCheckerThread() {
@@ -69,8 +70,9 @@ public class MySQLA_connection {
                 }
                 MySQLA_loggers.logInfo("CONNECTION - Checking connections status...");
                 int aliveConnections = 0;
-                synchronized (connections) {
-                    for (Connection c : connections) {
+                synchronized (connectionsByConfig) {
+                    for (Map.Entry<MySQLAConfig, Connection> entry : connectionsByConfig.entrySet()) {
+                        Connection c = entry.getValue();
                         boolean isConnectionValid = false;
                         try {
                             isConnectionValid = c.isValid(5);
@@ -80,13 +82,13 @@ public class MySQLA_connection {
                         if (isConnectionValid) aliveConnections++;
                     }
                 }
-                if (aliveConnections == connections.size()) {
-                    MySQLA_loggers.logInfo("CONNECTION - " + aliveConnections + "/" + connections.size()
+                if (aliveConnections == connectionsByConfig.size()) {
+                    MySQLA_loggers.logInfo("CONNECTION - " + aliveConnections + "/" + connectionsByConfig.size()
                             + " connections healthy.");
                 }
                 else {
-                    MySQLA_loggers.logError("CONNECTION - " + (connections.size()-aliveConnections) + "/"
-                            + connections.size() + " connections broken!");
+                    MySQLA_loggers.logError("CONNECTION - " + (connectionsByConfig.size()-aliveConnections) + "/"
+                            + connectionsByConfig.size() + " connections broken!");
                 }
             }
         });
@@ -94,11 +96,46 @@ public class MySQLA_connection {
         checkerThread.start();
     }
 
+//    private static void runCheckerThread() {
+//        checkerThread = new Thread( () -> {
+//            while (true) {
+//                try {
+//                    Thread.sleep(checkIntervalinSecs*1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                MySQLA_loggers.logInfo("CONNECTION - Checking connections status...");
+//                int aliveConnections = 0;
+//                synchronized (connections) {
+//                    for (Connection c : connections) {
+//                        boolean isConnectionValid = false;
+//                        try {
+//                            isConnectionValid = c.isValid(5);
+//                        } catch (SQLException e) {
+//                            MySQLA_loggers.logError("CONNECTION - Connection error: " + e.getMessage());
+//                        }
+//                        if (isConnectionValid) aliveConnections++;
+//                    }
+//                }
+//                if (aliveConnections == connections.size()) {
+//                    MySQLA_loggers.logInfo("CONNECTION - " + aliveConnections + "/" + connections.size()
+//                            + " connections healthy.");
+//                }
+//                else {
+//                    MySQLA_loggers.logError("CONNECTION - " + (connections.size()-aliveConnections) + "/"
+//                            + connections.size() + " connections broken!");
+//                }
+//            }
+//        });
+//        checkerThread.setDaemon(true);
+//        checkerThread.start();
+//    }
+
     private static void killConnections() {
-        for (Connection c : connections) {
+        for (Map.Entry<MySQLAConfig, Connection> entry : connectionsByConfig.entrySet()) {
             try {
                 MySQLA_loggers.logInfo("CONNECTION - Killing connection.");
-                c.close();
+                entry.getValue().close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

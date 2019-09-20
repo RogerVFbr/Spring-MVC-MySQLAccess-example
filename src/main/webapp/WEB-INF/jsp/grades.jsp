@@ -15,23 +15,18 @@
     <h2 style="margin-bottom: 20px">Grades</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Test 1</th><th>Test 2</th><th>Student</th><th>Class</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Test 1</th><th>Test 2</th><th>Student</th><th>Class</th></tr>
         <c:forEach var="grade" items="${list}">
             <tr>
                 <td>${grade.gradeid}</td>
                 <td>${grade.av1}</td>
                 <td>${grade.av2}</td>
                 <td>${grade.studentid_fk}</td>
-                <td>${grade.classid_fk}</td>
-                <td>
-                    <a href="updategrade/${grade.gradeid}" class="btn btn-warning">Edit</a>
-                    <a href="deletegrade/${grade.gradeid}" class="btn btn-danger">Delete</a>
-                </td>
+                <td>${grade.classcode}</td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
-    <a href="${pageContext.request.contextPath}/addgrade" class="btn btn-success" style="float: right">Add course</a>
+
 </div>
 
 

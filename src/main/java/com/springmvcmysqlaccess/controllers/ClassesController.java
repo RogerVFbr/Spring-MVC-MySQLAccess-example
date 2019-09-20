@@ -19,47 +19,52 @@ public class ClassesController {
     @Autowired
     ClassMdlDao dao;
 
+    // ---> Get all
     @RequestMapping(value = "/classes", method = RequestMethod.GET)
-    public String showClasses(Model m) {
+    public String showClass(Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        List<ClassMdl> classes = dao.getClasses();
-        m.addAttribute("list", classes);
+        List<ClassMdl> Classs = dao.getClasses();
+        m.addAttribute("list", Classs);
         return "classes";
     }
 
-//    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
-//    public String showAddClasses(Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        m.addAttribute("command", new ClassMdl());
-//        return "addclass";
-//    }
-//
-//    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
-//    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.add(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/updateclass/{id}", method = RequestMethod.GET)
-//    public String showUpdateClass(@PathVariable int id, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        ClassMdl classMdl = dao.getClassById(id);
-//        m.addAttribute("command", classMdl);
-//        return "updateclass";
-//    }
-//
-//    @RequestMapping(value = "/updateclass", method = RequestMethod.POST)
-//    public String updateClass(@ModelAttribute("class") ClassMdl classMdl, Model m) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.update(classMdl);
-//        return "redirect:/classes";
-//    }
-//
-//    @RequestMapping(value = "/deleteclass/{id}", method = RequestMethod.GET)
-//    public String deleteClass(@PathVariable int id) {
-//        if (!Auth.isLoggedIn()) return "redirect:/login";
-//        dao.delete(id);
-//        return "redirect:/classes";
-//    }
+    // ---> Add (GET)
+    @RequestMapping(value = "/addclass", method = RequestMethod.GET)
+    public String showAddClass(Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", new ClassMdl());
+        return "addclass";
+    }
+
+    // ---> Add (POST)
+    @RequestMapping(value = "/addclass", method = RequestMethod.POST)
+    public String addClass (@ModelAttribute("class") ClassMdl classMdl, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.add(classMdl);
+        return "redirect:/classes";
+    }
+
+    // ---> Update (GET)
+    @RequestMapping(value = "/updateclass/{id}", method = RequestMethod.GET)
+    public String showUpdateClass(@PathVariable int id, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        m.addAttribute("command", dao.getClassById(id));
+        return "updateclass";
+    }
+
+    // ---> Update (POST)
+    @RequestMapping(value = "/updateclass", method = RequestMethod.POST)
+    public String updateClass(@ModelAttribute("class") ClassMdl classMdl, Model m) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.update(classMdl);
+        return "redirect:/classes";
+    }
+
+    // ---> Delete
+    @RequestMapping(value = "/deleteclass/{id}", method = RequestMethod.GET)
+    public String deleteClass(@PathVariable int id) {
+        if (!Auth.isLoggedIn()) return "redirect:/login";
+        dao.delete(id);
+        return "redirect:/classes";
+    }
 }

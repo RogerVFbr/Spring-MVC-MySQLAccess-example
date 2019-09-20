@@ -1,18 +1,20 @@
 package com.springmvcmysqlaccess.models;
 
-public class Student {
+public class Student extends User {
     private int studentid;
     private String birthdate;
     private int userid_fk;
     private int courseid_fk;
+    private String coursename;
 
     public Student() {}
 
-    public Student(int studentid, String birthdate, int userid_fk, int courseid_fk) {
+    public Student(int studentid, String birthdate, int userid_fk, int courseid_fk, String coursename) {
         this.studentid = studentid;
         this.birthdate = birthdate;
         this.userid_fk = userid_fk;
         this.courseid_fk = courseid_fk;
+        this.coursename = coursename;
     }
 
     public int getStudentid() {
@@ -47,6 +49,14 @@ public class Student {
         this.courseid_fk = courseid_fk;
     }
 
+    public String getCoursename() {
+        return coursename;
+    }
+
+    public void setCoursename(String coursename) {
+        this.coursename = coursename;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -54,6 +64,7 @@ public class Student {
                 ", birthdate='" + birthdate + '\'' +
                 ", userid_fk=" + userid_fk +
                 ", courseid_fk=" + courseid_fk +
+                ", coursename=" + coursename +
                 '}';
     }
 }

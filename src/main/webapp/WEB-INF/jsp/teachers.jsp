@@ -15,21 +15,16 @@
     <h2 style="margin-bottom: 20px">Teachers</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Title</th><th>User</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Title</th><th>User</th></tr>
         <c:forEach var="teach" items="${list}">
             <tr>
                 <td>${teach.teacherid}</td>
                 <td>${teach.title}</td>
-                <td>${teach.userid_fk}</td>
-                <td>
-                    <a href="updateteacher/${teach.teacherid}" class="btn btn-warning">Edit</a>
-                    <a href="deleteteacher/${teach.teacherid}" class="btn btn-danger">Delete</a>
-                </td>
+                <td>${teach.name}</td>
             </tr>
         </c:forEach>
     </table>
-    <br/>
-    <a href="${pageContext.request.contextPath}/addteacher" class="btn btn-success" style="float: right">Add teacher</a>
+
 </div>
 
 
