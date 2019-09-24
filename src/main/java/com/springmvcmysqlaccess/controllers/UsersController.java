@@ -1,6 +1,8 @@
 package com.springmvcmysqlaccess.controllers;
 
-import com.springmvcmysqlaccess.dao.UserDao;
+import com.springmvcmysqlaccess.dao.*;
+import com.springmvcmysqlaccess.models.Student;
+import com.springmvcmysqlaccess.models.Teacher;
 import com.springmvcmysqlaccess.models.User;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 @Controller
 public class UsersController {
 
     @Autowired
-    UserDao dao;
+    UserDao userDao;
+
+    @Autowired
+    ProfileDao profileDao;
+
+    @Autowired
+    TeacherDao teacherDao;
+
+    @Autowired
+    StudentDao studentDao;
+
+    @Autowired
+    StudentUserDao studentUserDao;
 
     // ---> Get all
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showUsers(Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        List<User> users = dao.getUsers();
-        m.addAttribute("list", users);
+        m.addAttribute("studentUser", studentUserDao.getStudentUsers());
+        m.addAttribute("users", userDao.getUsers());
         return "users";
     }
 
@@ -37,10 +49,10 @@ public class UsersController {
     }
 
     // ---> Add (POST)
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public String adduser (@ModelAttribute("user") User user, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.add(user);
+        userDao.add(user);
         return "redirect:/users";
     }
 
@@ -48,15 +60,16 @@ public class UsersController {
     @RequestMapping(value = "/updateuser/{id}", method = RequestMethod.GET)
     public String showUpdateUser(@PathVariable int id, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        m.addAttribute("command", dao.getUserById(id));
-        return "updateuser";
+        m.addAttribute("command", userDao.getUserById(id));
+        m.addAttribute("profiles", profileDao.getProfiles());
+        return "users-update";
     }
 
     // ---> Update (POST)
     @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute("user") User user, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.update(user);
+        userDao.update(user);
         return "redirect:/users";
     }
 
@@ -64,7 +77,15 @@ public class UsersController {
     @RequestMapping(value = "/deleteuser/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.delete(id);
+        Teacher teacher = teacherDao.getTeacherByUserId(id);
+        if (teacher == null) {
+            Student student = studentDao.getStudentByUserId(id);
+            if (student != null) studentDao.delete(student.getStudentid());
+        }
+        else {
+            teacherDao.delete(teacher.getTeacherid());
+        }
+        userDao.delete(id);
         return "redirect:/users";
     }
 }

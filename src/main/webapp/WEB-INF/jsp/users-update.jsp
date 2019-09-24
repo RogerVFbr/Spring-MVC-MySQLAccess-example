@@ -3,26 +3,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Register student</title>
+    <title>Update user</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
-    <h2 style="margin-bottom: 20px">Register student</h2>
-    <form:form method="post" action="${pageContext.request.contextPath}/registerstudent">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <form:input path="name" type="text" class="form-control" id="name" required="required"/>
+
+    <h2 style="margin-bottom: 20px">Update user</h2>
+
+    <form:form method="post" action="${pageContext.request.contextPath}/updateuser">
+
+        <div class="form-group" hidden>
+            <label for="userid">UserId:</label>
+            <form:input path="userid" type="text" class="form-control" id="userid" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="enrollment">Enrollment:</label>
             <form:input path="enrollment" type="text" class="form-control" id="enrollment" required="required"/>
         </div>
+
         <div class="form-group">
-            <label for="birthdate">Birth date:</label>
-            <form:input path="birthdate" type="text" class="form-control" id="birthdate" required="required"/>
+            <label for="name">Name:</label>
+            <form:input path="name" type="text" class="form-control" id="name" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="pwd">Password:</label>
             <form:input path="password" type="password" class="form-control" id="pwd" required="required"/>
@@ -34,20 +40,13 @@
         </div>
 
         <div class="form-group">
-            <label for="courseid_fk">Course:</label>
-            <form:select path="courseid_fk" id="courseid_fk" class="form-control">
-                <form:options items="${courses}" itemLabel="coursename" itemValue="courseid"/>
-            </form:select>
-        </div>
-
-        <div class="form-group">
             <label for="profile">Profile:</label>
             <form:select path="profileid_fk" id="profile" class="form-control">
                 <form:options items="${profiles}" itemLabel="profilename" itemValue="profileid"/>
             </form:select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Update</button>
 
     </form:form>
     <c:if test="${not empty errors}">
@@ -63,3 +62,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+

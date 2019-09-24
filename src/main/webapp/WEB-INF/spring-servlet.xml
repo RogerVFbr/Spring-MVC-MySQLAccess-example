@@ -30,8 +30,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="gradeDao" class="com.springmvcmysqlaccess.dao.GradeDao" autowire="byName" />
     <bean id="profileDao" class="com.springmvcmysqlaccess.dao.ProfileDao" autowire="byName" />
     <bean id="studentDao" class="com.springmvcmysqlaccess.dao.StudentDao" autowire="byName" />
+    <bean id="studentUserDao" class="com.springmvcmysqlaccess.dao.StudentUserDao" autowire="byName" />
     <bean id="subjectDao" class="com.springmvcmysqlaccess.dao.SubjectDao" autowire="byName" />
     <bean id="teacherDao" class="com.springmvcmysqlaccess.dao.TeacherDao" autowire="byName" />
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" autowire="byName" />
 
 <!--    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>-->
 <!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->

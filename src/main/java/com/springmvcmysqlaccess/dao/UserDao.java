@@ -31,6 +31,10 @@ public class UserDao {
         return db.getSingleItem(User.class, "email='" + email + "'");
     }
 
+    public User getUserByEnrollment(int enrollment) {
+        return db.getSingleItem(User.class, "enrollment='" + enrollment + "'");
+    }
+
     public List<User> getUsers() {
         return db.getFill(User.class, "profileid_fk", Res.PROFILES_TABLE);
     }

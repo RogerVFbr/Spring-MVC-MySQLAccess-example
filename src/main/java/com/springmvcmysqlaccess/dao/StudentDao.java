@@ -27,6 +27,10 @@ public class StudentDao {
         return db.getSingleItem(Student.class, Res.STUDENTS_TABLE_PK + "=" + id);
     }
 
+    public Student getStudentByUserId(int id) {
+        return db.getSingleItem(Student.class, "userid_fk=" + id);
+    }
+
     public List<Student> getStudents() {
         return db.getFill(
                 Student.class,

@@ -27,6 +27,10 @@ public class TeacherDao {
         return db.getSingleItem(Teacher.class, Res.TEACHERS_TABLE_PK + "=" + id);
     }
 
+    public Teacher getTeacherByUserId(int id) {
+        return db.getSingleItem(Teacher.class, "userid_fk=" + id);
+    }
+
     public List<Teacher> getTeachers() {
         return db.getFill(Teacher.class, "userid_fk", Res.USERS_TABLE);
     }

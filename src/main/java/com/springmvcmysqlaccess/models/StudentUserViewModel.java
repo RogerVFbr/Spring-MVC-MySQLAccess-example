@@ -1,7 +1,9 @@
 package com.springmvcmysqlaccess.models;
 
-public class RegisterStudentViewModel extends User{
+public class StudentUserViewModel extends User{
+    private int studentid;
     private String birthdate;
+    private int userid_fk;
     private int courseid_fk;
     private int enrollment;
     private String name;
@@ -9,10 +11,13 @@ public class RegisterStudentViewModel extends User{
     private String email;
     private int profileid_fk;
 
-    public RegisterStudentViewModel() {}
+    public StudentUserViewModel() {}
 
-    public RegisterStudentViewModel(String birthdate, int courseid_fk, int enrollment, String name, String password, String email, int profileid_fk) {
+    public StudentUserViewModel(int studentid, String birthdate, int userid_fk, int courseid_fk, int enrollment,
+                                String name, String password, String email, int profileid_fk) {
+        this.studentid = studentid;
         this.birthdate = birthdate;
+        this.userid_fk = userid_fk;
         this.courseid_fk = courseid_fk;
         this.enrollment = enrollment;
         this.name = name;
@@ -21,12 +26,28 @@ public class RegisterStudentViewModel extends User{
         this.profileid_fk = profileid_fk;
     }
 
+    public int getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
+    }
+
     public String getBirthdate() {
         return birthdate;
     }
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public int getUserid_fk() {
+        return userid_fk;
+    }
+
+    public void setUserid_fk(int userid_fk) {
+        this.userid_fk = userid_fk;
     }
 
     public int getCourseid_fk() {
@@ -79,8 +100,10 @@ public class RegisterStudentViewModel extends User{
 
     @Override
     public String toString() {
-        return "RegisterStudentViewModel{" +
-                "birthdate='" + birthdate + '\'' +
+        return "StudentUserViewModel{" +
+                "studentid='" + studentid + '\'' +
+                ", birthdate='" + birthdate + '\'' +
+                ", userid_fk='" + userid_fk + '\'' +
                 ", courseid_fk=" + courseid_fk +
                 ", enrollment=" + enrollment +
                 ", name='" + name + '\'' +

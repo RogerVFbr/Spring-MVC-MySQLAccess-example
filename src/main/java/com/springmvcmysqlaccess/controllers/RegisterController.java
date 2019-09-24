@@ -1,25 +1,23 @@
 package com.springmvcmysqlaccess.controllers;
 
+import com.springmvcmysqlaccess.config.Res;
 import com.springmvcmysqlaccess.dao.*;
-import com.springmvcmysqlaccess.models.*;
+import com.springmvcmysqlaccess.models.StudentUserViewModel;
+import com.springmvcmysqlaccess.models.TeacherUserViewModel;
+import com.springmvcmysqlaccess.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigInteger;
+import java.util.List;
 
 @Controller
 public class RegisterController {
-
-    @Autowired
-    StudentDao studentDao;
-
-    @Autowired
-    TeacherDao teacherDao;
 
     @Autowired
     CourseDao courseDao;
@@ -30,78 +28,65 @@ public class RegisterController {
     @Autowired
     ProfileDao profileDao;
 
-    @RequestMapping(value = "/registerstudent", method = RequestMethod.GET)
-    public String showRegisterStudent(Model m) {
-        RestTemplate restTemplate = new RestTemplate();
-        Greeting quote = restTemplate.getForObject("http://localhost:8080/SpringMVCPagination_war_exploded/greeting", Greeting.class);
-        System.out.println(quote.toString());
-        m.addAttribute("command", new RegisterStudentViewModel());
-        m.addAttribute("profiles", profileDao.getProfiles());
-        m.addAttribute("courses", courseDao.getCourses());
-        return "registerstudent";
+    @Autowired
+    RestTemplate restTemplate;
+
+    @RequestMapping(value = "/register/{type}", method = RequestMethod.GET)
+    public String showRegisterByType(@PathVariable String type, Model m) {
+        if (type.equals("student")) {
+            m.addAttribute("command", new StudentUserViewModel());
+            m.addAttribute("profiles", profileDao.getProfiles());
+            m.addAttribute("courses", courseDao.getCourses());
+            return "registerstudent";
+        }
+        else {
+            m.addAttribute("command", new TeacherUserViewModel());
+            m.addAttribute("profiles", profileDao.getProfiles());
+            return "registerteacher";
+        }
     }
 
     @RequestMapping(value = "/registerstudent", method = RequestMethod.POST)
-    public String registerStudent (@ModelAttribute("registerstudent") RegisterStudentViewModel viewModel, Model m) {
-        User dbUser = userDao.getUserByEmail(viewModel.getEmail());
+    public String registerStudent (@ModelAttribute("registerstudent") StudentUserViewModel viewModel, Model m) {
 
-        if (dbUser==null) {
-            User user = getUserFromViewModel(viewModel);
-            int userId = ((BigInteger) userDao.add(user)).intValue();
-            Student student = new Student();
-            student.setUserid_fk(userId);
-            student.setBirthdate(viewModel.getBirthdate());
-            student.setCourseid_fk(viewModel.getCourseid_fk());
-            studentDao.add(student);
-            m.addAttribute("command", user);
+        List response = restTemplate.postForObject(Res.API_BASE_ENDPOINT + "/registerstudentapi", viewModel,
+                List.class);
+
+        if (response.isEmpty()) {
+            m.addAttribute("command", getUserDataFromViewModel(viewModel));
             return "login";
         }
 
-        viewModel.setEmail("");
-        m.addAttribute("command", viewModel);
-        m.addAttribute("profiles", profileDao.getProfiles());
+        updateModel(viewModel, response, m);
         m.addAttribute("courses", courseDao.getCourses());
-        m.addAttribute("error", "E-mail address is already taken.");
         return "registerstudent";
     }
 
-
-    @RequestMapping(value = "/registerteacher", method = RequestMethod.GET)
-    public String showRegisterTeacher(Model m) {
-        m.addAttribute("command", new RegisterTeacherViewModel());
-        m.addAttribute("profiles", profileDao.getProfiles());
-        return "registerteacher";
-    }
-
     @RequestMapping(value = "/registerteacher", method = RequestMethod.POST)
-    public String registerTeacher (@ModelAttribute("registerteacher") RegisterTeacherViewModel viewModel, Model m) {
-        User dbUser = userDao.getUserByEmail(viewModel.getEmail());
+    public String registerTeacher (@ModelAttribute("registerteacher") TeacherUserViewModel viewModel, Model m) {
 
-        if (dbUser==null) {
-            User user = getUserFromViewModel(viewModel);
-            int userId = ((BigInteger) userDao.add(user)).intValue();
-            Teacher teacher = new Teacher();
-            teacher.setUserid_fk(userId);
-            teacher.setTitle(viewModel.getTitle());
-            teacherDao.add(teacher);
-            m.addAttribute("command", user);
+        List response = restTemplate.postForObject(Res.API_BASE_ENDPOINT + "/registerteacherapi", viewModel,
+                List.class);
+
+        if (response.isEmpty()) {
+            m.addAttribute("command", getUserDataFromViewModel(viewModel));
             return "login";
         }
 
-        viewModel.setEmail("");
-        m.addAttribute("command", viewModel);
-        m.addAttribute("profiles", profileDao.getProfiles());
-        m.addAttribute("error", "E-mail address is already taken.");
+        updateModel(viewModel, response, m);
         return "registerteacher";
     }
 
-    private <T extends User> User getUserFromViewModel (T viewModel) {
-        User user = new User ();
-        user.setEnrollment(viewModel.getEnrollment());
-        user.setName(viewModel.getName());
-        user.setPassword(viewModel.getPassword());
+    private <T extends User> User getUserDataFromViewModel (T viewModel) {
+        User user = new User();
         user.setEmail(viewModel.getEmail());
-        user.setProfileid_fk(viewModel.getProfileid_fk());
+        user.setPassword(viewModel.getPassword());
         return user;
+    }
+
+    private <T> void updateModel(T viewModel, List response, Model m) {
+        m.addAttribute("command", viewModel);
+        m.addAttribute("profiles", profileDao.getProfiles());
+        m.addAttribute("errors", response);
     }
 }

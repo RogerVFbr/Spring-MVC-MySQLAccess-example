@@ -1,6 +1,6 @@
 package com.springmvcmysqlaccess.models;
 
-public class RegisterTeacherViewModel extends User {
+public class TeacherUserViewModel extends User {
     private String title;
     private Integer userid_fk;
     private String name;
@@ -9,9 +9,9 @@ public class RegisterTeacherViewModel extends User {
     private String email;
     private int profileid_fk;
 
-    public RegisterTeacherViewModel() {}
+    public TeacherUserViewModel() {}
 
-    public RegisterTeacherViewModel(String title, Integer userid_fk, String name, int enrollment, String password, String email, int profileid_fk) {
+    public TeacherUserViewModel(String title, Integer userid_fk, String name, int enrollment, String password, String email, int profileid_fk) {
         this.title = title;
         this.userid_fk = userid_fk;
         this.name = name;
@@ -79,7 +79,7 @@ public class RegisterTeacherViewModel extends User {
 
     @Override
     public String toString() {
-        return "RegisterTeacherViewModel{" +
+        return "TeacherUserViewModel{" +
                 "title='" + title + '\'' +
                 ", userid_fk=" + userid_fk +
                 ", name='" + name + '\'' +

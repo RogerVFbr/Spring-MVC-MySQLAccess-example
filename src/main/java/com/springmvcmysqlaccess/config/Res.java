@@ -26,4 +26,6 @@ public class Res {
     public static final String USERS_TABLE = "user";
     public static final String USERS_TABLE_PK = "userid";
 
+    public static final String API_BASE_ENDPOINT = "http://localhost:8080/SpringMVCPagination_war_exploded";
+
 }

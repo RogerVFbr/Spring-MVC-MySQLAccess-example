@@ -22,8 +22,8 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary" style="float: left">Login</button>
             <div style="float: right">
-                <a href="${pageContext.request.contextPath}/registerstudent" class="btn btn-success">Register student</a>
-                <a href="${pageContext.request.contextPath}/registerteacher" class="btn btn-success">Register teacher</a>
+                <a href="${pageContext.request.contextPath}/register/student" class="btn btn-success">Register student</a>
+                <a href="${pageContext.request.contextPath}/register/teacher" class="btn btn-success">Register teacher</a>
             </div>
 
         </div>

@@ -1,60 +1,61 @@
 1. Construir aplicativos Java utilizando JSP e Servlets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A aplicação entregue implementa uma aplicação Web com processamento no servidor utilizando JSP?
+OK - A aplicação entregue implementa uma aplicação Web com processamento no servidor utilizando JSP?
 
-A aplicação entregue implementa servlets para a criação e para a consulta de dados utilizando os
-métodos GET e POST corretamente?
+OK - A aplicação entregue implementa servlets para a criação e para a consulta de dados utilizando os
+     métodos GET e POST corretamente?
 
-A aplicação entregue utiliza JSP para trabalhar com dados dinâmicos entre o cliente e o servidor?
+OK - A aplicação entregue utiliza JSP para trabalhar com dados dinâmicos entre o cliente e o servidor?
 
-O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
-TPs e assessment desta competência?
+OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
+     TPs e assessment desta competência?
 
 
 2. Desenvolver aplicações Java Web utilizando arquitetura MVC com gerenciamento de estado
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As classes da aplicação entregue estão separadas em pacotes diferentes por responsabilidade, em camadas
-de modelo, controle e visão?
+OK - As classes da aplicação entregue estão separadas em pacotes diferentes por responsabilidade, em camadas
+     de modelo, controle e visão?
 
-A aplicação entregue possui um Spring Web MVC configurado corretamente e utiliza pelo menos três
-controladores Spring Web MVC corretamente?
+OK - A aplicação entregue possui um Spring Web MVC configurado corretamente e utiliza pelo menos três
+     controladores Spring Web MVC corretamente?
 
-A aplicação entregue implementa mecanismos de controle de acesso para autenticar, autorizar e filtrar
-o acesso dos usuários à aplicação?
+OK - A aplicação entregue implementa mecanismos de controle de acesso para autenticar, autorizar e filtrar
+     o acesso dos usuários à aplicação?
 
-O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
-TPs e assessment desta competência?
+OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
+     TPs e assessment desta competência?
 
 
 3. Desenvolver aplicações com Java Persistence API e o framework Hibernate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A Aplicação entregue utiliza a API de Persistência Java para anotar classes como entidades?
+?? - A Aplicação entregue utiliza a API de Persistência Java para anotar classes como entidades?
 
-A Aplicação mapeia relacionamentos entre entidades usando Hibernate, de modo coerente com seu
-domínio e documentado conforme solicitado no enunciado?
+?? - A Aplicação mapeia relacionamentos entre entidades usando Hibernate, de modo coerente com seu
+     domínio e documentado conforme solicitado no enunciado?
 
-A aplicação implementa corretamente um CRUD em back-end (Criação, Recuperação, Atualização e Exclusão
-de Dados) usando Hibernate para pelo menos três classes do domínio?
+NAO - A aplicação implementa corretamente um CRUD em back-end (Criação, Recuperação, Atualização e Exclusão
+     de Dados) usando Hibernate para pelo menos três classes do domínio?
 
-O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
-TPs e assessment desta competência?
+OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
+     TPs e assessment desta competência?
 
 
 4. Desenvolver APIs Java com serviços web seguindo a arquitetura REST
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A aplicação mapeia pelo menos um serviço web POST com arquitetura REST, permitindo que outras aplicações
-escrevam dados nela?
+OK - A aplicação mapeia pelo menos um serviço web POST com arquitetura REST, permitindo que outras aplicações
+     escrevam dados nela?
 
-A aplicação mapeia pelo menos um serviço web GET com arquitetura REST, permitindo que outras aplicações
-leiam dados dela?
+OK - A aplicação mapeia pelo menos um serviço web GET com arquitetura REST, permitindo que outras aplicações
+     leiam dados dela?
 
-Conforme o enunciado, foi entregue uma aplicação auxiliar RESTful que lê e grava dados na aplicação
-principal entregue no assessment? Também foi entregue uma documentação explicativa para outros desenvolvedores
-poderem criar aplicações que consumam a API?
+(Documentacao???)
+OK - Conforme o enunciado, foi entregue uma aplicação auxiliar RESTful que lê e grava dados na aplicação
+     principal entregue no assessment? Também foi entregue uma documentação explicativa para outros desenvolvedores
+     poderem criar aplicações que consumam a API?
 
-O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
-TPs e assessment desta competência?
+OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
+     TPs e assessment desta competência?

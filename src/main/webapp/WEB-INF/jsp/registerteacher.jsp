@@ -10,7 +10,7 @@
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
     <h2 style="margin-bottom: 20px">Register teacher</h2>
-    <form:form method="post" action="registerteacher">
+    <form:form method="post" action="${pageContext.request.contextPath}/registerteacher">
 
         <div class="form-group">
             <label for="name">Name:</label>

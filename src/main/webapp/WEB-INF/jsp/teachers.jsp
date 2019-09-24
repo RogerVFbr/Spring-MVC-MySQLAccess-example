@@ -5,6 +5,7 @@
 <head>
     <title>Teachers</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 
@@ -15,12 +16,16 @@
     <h2 style="margin-bottom: 20px">Teachers</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Title</th><th>User</th></tr>
+        <tr><th>ID</th><th>Title</th><th>User</th><th>Actions</th></tr>
         <c:forEach var="teach" items="${list}">
             <tr>
                 <td>${teach.teacherid}</td>
                 <td>${teach.title}</td>
                 <td>${teach.name}</td>
+                <td>
+                    <a href=""><i class="fa fa-fw fa-edit"></i></a>
+                    <a href=""><i class="fa fa-fw fa-trash"></i></a>
+                </td>
             </tr>
         </c:forEach>
     </table>

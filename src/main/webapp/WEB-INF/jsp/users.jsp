@@ -5,6 +5,7 @@
 <head>
     <title>Users</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 
@@ -12,17 +13,40 @@
 
 <div class="container">
 
+    <h2 style="margin-bottom: 20px">Students</h2>
+
+    <table class="table table-striped">
+        <tr><th>Name</th><th>E-mail</th><th>Enrollment</th><th>Profile</th><th>Birthdate</th><th>Actions</th></tr>
+        <c:forEach var="su" items="${studentUser}">
+            <tr>
+                <td>${su.name}</td>
+                <td>${su.email}</td>
+                <td>${su.enrollment}</td>
+                <td>${su.profilename}</td>
+                <td>${su.birthdate}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/updateuser/${su.userid}"><i class="fa fa-fw fa-edit"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${su.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
     <h2 style="margin-bottom: 20px">Users</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th></tr>
-        <c:forEach var="user" items="${list}">
+        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th><th>Actions</th></tr>
+        <c:forEach var="user" items="${users}">
             <tr>
                 <td>${user.userid}</td>
                 <td>${user.enrollment}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>${user.profilename}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/updateuser/${user.userid}"><i class="fa fa-fw fa-edit"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${user.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                </td>
             </tr>
         </c:forEach>
     </table>
