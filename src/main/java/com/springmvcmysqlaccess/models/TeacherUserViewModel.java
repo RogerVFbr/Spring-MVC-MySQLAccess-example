@@ -1,8 +1,10 @@
 package com.springmvcmysqlaccess.models;
 
 public class TeacherUserViewModel extends User {
+    private int teacherid;
     private String title;
     private Integer userid_fk;
+    private int userid;
     private String name;
     private int enrollment;
     private String password;
@@ -11,9 +13,11 @@ public class TeacherUserViewModel extends User {
 
     public TeacherUserViewModel() {}
 
-    public TeacherUserViewModel(String title, Integer userid_fk, String name, int enrollment, String password, String email, int profileid_fk) {
+    public TeacherUserViewModel(int teacherid, String title, Integer userid_fk, Integer userid, String name, int enrollment, String password, String email, int profileid_fk) {
+        this.teacherid = teacherid;
         this.title = title;
         this.userid_fk = userid_fk;
+        this.userid = userid;
         this.name = name;
         this.enrollment = enrollment;
         this.password = password;
@@ -77,11 +81,22 @@ public class TeacherUserViewModel extends User {
         this.profileid_fk = profileid_fk;
     }
 
+    public int getTeacherid() { return teacherid; }
+
+    public void setTeacherid(int teacherid) { this.teacherid = teacherid; }
+
+    @Override
+    public int getUserid() { return userid; }
+
+    public void setUserid(Integer userid) { this.userid = userid; }
+
     @Override
     public String toString() {
         return "TeacherUserViewModel{" +
-                "title='" + title + '\'' +
+                "teacherid='" + teacherid + '\'' +
+                ", title='" + title + '\'' +
                 ", userid_fk=" + userid_fk +
+                ", userid=" + userid +
                 ", name='" + name + '\'' +
                 ", enrollment=" + enrollment +
                 ", password='" + password + '\'' +

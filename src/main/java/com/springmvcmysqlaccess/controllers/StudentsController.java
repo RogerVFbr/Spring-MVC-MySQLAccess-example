@@ -27,9 +27,6 @@ public class StudentsController {
     CourseDao courseDao;
 
     @Autowired
-    UserDao userDao;
-
-    @Autowired
     ProfileDao profileDao;
 
     // ---> Get all
@@ -71,8 +68,7 @@ public class StudentsController {
     @RequestMapping(value = "/updatestudent", method = RequestMethod.POST)
     public String updateStudent(@ModelAttribute("student") StudentUserViewModel studentUser, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-
-        studentDao.update(student);
+        studentUserDao.update(studentUser);
         return "redirect:/users";
     }
 
@@ -80,7 +76,7 @@ public class StudentsController {
     @RequestMapping(value = "/deletestudent/{id}", method = RequestMethod.GET)
     public String deleteStudent(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        studentDao.delete(id);
-        return "redirect:/students";
+        studentUserDao.delete(id);
+        return "redirect:/users";
     }
 }

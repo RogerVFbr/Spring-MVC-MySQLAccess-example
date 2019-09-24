@@ -26,30 +26,48 @@
                 <td>${su.birthdate}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/updatestudent/${su.studentid}"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="${pageContext.request.contextPath}/deletestudent/${su.studentid}"><i class="fa fa-fw fa-trash"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${su.userid}"><i class="fa fa-fw fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 
-    <h2 style="margin-bottom: 20px">Users</h2>
+    <h2 style="margin-bottom: 20px">Teachers</h2>
 
     <table class="table table-striped">
-        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th><th>Actions</th></tr>
-        <c:forEach var="user" items="${users}">
+        <tr><th>Enrollment</th><th>Title</th><th>Name</th><th>E-mail</th><th>Actions</th></tr>
+        <c:forEach var="tu" items="${teacherUser}">
             <tr>
-                <td>${user.userid}</td>
-                <td>${user.enrollment}</td>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.profilename}</td>
+                <td>${tu.enrollment}</td>
+                <td>${tu.title}</td>
+                <td>${tu.name}</td>
+                <td>${tu.email}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/updateuser/${user.userid}"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="${pageContext.request.contextPath}/deleteuser/${user.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                    <a href="${pageContext.request.contextPath}/updateteacher/${tu.teacherid}"><i class="fa fa-fw fa-edit"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${tu.userid}"><i class="fa fa-fw fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
+
+<%--    <h2 style="margin-bottom: 20px">Users</h2>--%>
+
+<%--    <table class="table table-striped">--%>
+<%--        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th><th>Actions</th></tr>--%>
+<%--        <c:forEach var="user" items="${users}">--%>
+<%--            <tr>--%>
+<%--                <td>${user.userid}</td>--%>
+<%--                <td>${user.enrollment}</td>--%>
+<%--                <td>${user.name}</td>--%>
+<%--                <td>${user.email}</td>--%>
+<%--                <td>${user.profilename}</td>--%>
+<%--                <td>--%>
+<%--                    <a href="${pageContext.request.contextPath}/updateuser/${user.userid}"><i class="fa fa-fw fa-edit"></i></a>--%>
+<%--                    <a href="${pageContext.request.contextPath}/deleteuser/${user.userid}"><i class="fa fa-fw fa-trash"></i></a>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
+<%--    </table>--%>
 
 </div>
 

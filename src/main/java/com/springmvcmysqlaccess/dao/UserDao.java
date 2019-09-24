@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.USERS_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.USERS_TABLE);
 
     public Object add(Object p) {
         return db.add(p);

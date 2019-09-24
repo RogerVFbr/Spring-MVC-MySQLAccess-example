@@ -1,7 +1,10 @@
 package com.springmvcmysqlaccess.controllers;
 
+import com.springmvcmysqlaccess.dao.ProfileDao;
 import com.springmvcmysqlaccess.dao.TeacherDao;
+import com.springmvcmysqlaccess.dao.TeacherUserDao;
 import com.springmvcmysqlaccess.models.Teacher;
+import com.springmvcmysqlaccess.models.TeacherUserViewModel;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +20,19 @@ import java.util.List;
 public class TeachersController {
 
     @Autowired
-    TeacherDao dao;
+    TeacherDao teacherDao;
+
+    @Autowired
+    TeacherUserDao teacherUserDao;
+
+    @Autowired
+    ProfileDao profileDao;
 
     // ---> Get all
     @RequestMapping(value = "/teachers", method = RequestMethod.GET)
     public String showTeachers(Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        List<Teacher> teachers = dao.getTeachers();
+        List<Teacher> teachers = teacherDao.getTeachers();
         m.addAttribute("list", teachers);
         return "teachers";
     }
@@ -40,7 +49,7 @@ public class TeachersController {
     @RequestMapping(value = "/addteacher", method = RequestMethod.POST)
     public String addTeacher (@ModelAttribute("teacher") Teacher teacher, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.add(teacher);
+        teacherDao.add(teacher);
         return "redirect:/teachers";
     }
 
@@ -48,23 +57,24 @@ public class TeachersController {
     @RequestMapping(value = "/updateteacher/{id}", method = RequestMethod.GET)
     public String showUpdateTeacher(@PathVariable int id, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        m.addAttribute("command", dao.getTeacherById(id));
+        m.addAttribute("command", teacherUserDao.getTeacherUserById(id));
+        m.addAttribute("profiles", profileDao.getProfiles());
         return "updateteacher";
     }
 
     // ---> Update (POST)
     @RequestMapping(value = "/updateteacher", method = RequestMethod.POST)
-    public String updateTeacher(@ModelAttribute("teacher") Teacher teacher, Model m) {
+    public String updateTeacher(@ModelAttribute("teacher") TeacherUserViewModel teacherUser, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.update(teacher);
-        return "redirect:/teachers";
+        teacherUserDao.update(teacherUser);
+        return "redirect:/users";
     }
 
     // ---> Delete
     @RequestMapping(value = "/deleteteacher/{id}", method = RequestMethod.GET)
     public String deleteTeacher(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.delete(id);
-        return "redirect:/teachers";
+        teacherUserDao.delete(id);
+        return "redirect:/users";
     }
 }

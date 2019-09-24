@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ProfileDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.PROFILES_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.PROFILES_TABLE);
 
     public Object add(Profile p) {
         return db.add(p);

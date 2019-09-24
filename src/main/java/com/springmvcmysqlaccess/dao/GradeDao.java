@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GradeDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.GRADES_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.GRADES_TABLE);
 
     public Object add(Grade p) {
         return db.add(p);

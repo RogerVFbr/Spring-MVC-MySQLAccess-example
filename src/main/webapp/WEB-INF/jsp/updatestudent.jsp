@@ -10,19 +10,38 @@
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
     <h2 style="margin-bottom: 20px">Update student</h2>
-    <form:form method="post" action="${pageContext.request.contextPath}/registerstudent">
+    <form:form method="post" action="${pageContext.request.contextPath}/updatestudent">
+
+        <div class="form-group" hidden>
+            <label for="userid">UserID:</label>
+            <form:input path="userid" type="text" class="form-control" id="userid" required="required"/>
+        </div>
+
+        <div class="form-group" hidden>
+            <label for="studentid">StudentID:</label>
+            <form:input path="studentid" type="text" class="form-control" id="studentid" required="required"/>
+        </div>
+
+        <div class="form-group" hidden>
+            <label for="userid_fk">userid_fk:</label>
+            <form:input path="userid_fk" type="text" class="form-control" id="userid_fk" required="required"/>
+        </div>
+
         <div class="form-group">
             <label for="name">Name:</label>
             <form:input path="name" type="text" class="form-control" id="name" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="enrollment">Enrollment:</label>
             <form:input path="enrollment" type="text" class="form-control" id="enrollment" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="birthdate">Birth date:</label>
             <form:input path="birthdate" type="text" class="form-control" id="birthdate" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="pwd">Password:</label>
             <form:input path="password" type="password" class="form-control" id="pwd" required="required"/>
@@ -47,7 +66,7 @@
             </form:select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Update</button>
 
     </form:form>
     <c:if test="${not empty errors}">

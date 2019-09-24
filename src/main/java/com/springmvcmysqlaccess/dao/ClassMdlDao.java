@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClassMdlDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.CLASSES_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.CLASSES_TABLE);
 
 
     public Object add(ClassMdl p) {

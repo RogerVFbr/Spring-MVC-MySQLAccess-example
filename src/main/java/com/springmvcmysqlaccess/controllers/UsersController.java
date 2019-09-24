@@ -31,11 +31,15 @@ public class UsersController {
     @Autowired
     StudentUserDao studentUserDao;
 
+    @Autowired
+    TeacherUserDao teacherUserDao;
+
     // ---> Get all
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String showUsers(Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
         m.addAttribute("studentUser", studentUserDao.getStudentUsers());
+        m.addAttribute("teacherUser", teacherUserDao.getTeacherUsers());
         m.addAttribute("users", userDao.getUsers());
         return "users";
     }
@@ -62,7 +66,7 @@ public class UsersController {
         if (!Auth.isLoggedIn()) return "redirect:/login";
         m.addAttribute("command", userDao.getUserById(id));
         m.addAttribute("profiles", profileDao.getProfiles());
-        return "users-update";
+        return "updatestudent";
     }
 
     // ---> Update (POST)
@@ -78,7 +82,7 @@ public class UsersController {
     public String deleteUser(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
         Teacher teacher = teacherDao.getTeacherByUserId(id);
-        if (teacher == null) {
+        if (teacher != null) {
             Student student = studentDao.getStudentByUserId(id);
             if (student != null) studentDao.delete(student.getStudentid());
         }

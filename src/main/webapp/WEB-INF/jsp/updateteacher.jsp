@@ -3,30 +3,38 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Update user</title>
+    <title>Update teacher</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
-
-    <h2 style="margin-bottom: 20px">Update user</h2>
-
-    <form:form method="post" action="${pageContext.request.contextPath}/updateuser">
+    <h2 style="margin-bottom: 20px">Update teacher</h2>
+    <form:form method="post" action="${pageContext.request.contextPath}/updateteacher">
 
         <div class="form-group" hidden>
-            <label for="userid">UserId:</label>
+            <label for="userid">UserID:</label>
             <form:input path="userid" type="text" class="form-control" id="userid" required="required"/>
         </div>
 
-        <div class="form-group">
-            <label for="enrollment">Enrollment:</label>
-            <form:input path="enrollment" type="text" class="form-control" id="enrollment" required="required"/>
+        <div class="form-group" hidden>
+            <label for="teacherid">StudentID:</label>
+            <form:input path="teacherid" type="text" class="form-control" id="teacherid" required="required"/>
+        </div>
+
+        <div class="form-group" hidden>
+            <label for="userid_fk">userid_fk:</label>
+            <form:input path="userid_fk" type="text" class="form-control" id="userid_fk" required="required"/>
         </div>
 
         <div class="form-group">
             <label for="name">Name:</label>
             <form:input path="name" type="text" class="form-control" id="name" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <label for="enrollment">Enrollment:</label>
+            <form:input path="enrollment" type="text" class="form-control" id="enrollment" required="required"/>
         </div>
 
         <div class="form-group">

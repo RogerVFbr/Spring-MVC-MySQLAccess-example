@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TeacherDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.TEACHERS_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.TEACHERS_TABLE);
 
     public Object add(Teacher p) {
         return db.add(p);

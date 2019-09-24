@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SubjectDao {
 
-    private MySQLAccess db = new MySQLAccess(DBConfig.getDBConfig(), Res.SUBJECTS_TABLE);
+    private MySQLAccess db = new MySQLAccess(DBConfig.get(), Res.SUBJECTS_TABLE);
 
     public Object add(Subject p) {
         return db.add(p);
