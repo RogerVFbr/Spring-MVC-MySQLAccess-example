@@ -1,7 +1,8 @@
 package com.springmvcmysqlaccess.controllers;
 
-import com.springmvcmysqlaccess.dao.StudentDao;
+import com.springmvcmysqlaccess.dao.*;
 import com.springmvcmysqlaccess.models.Student;
+import com.springmvcmysqlaccess.models.StudentUserViewModel;
 import com.springmvcmysqlaccess.security.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +18,25 @@ import java.util.List;
 public class StudentsController {
 
     @Autowired
-    StudentDao dao;
+    StudentDao studentDao;
+
+    @Autowired
+    StudentUserDao studentUserDao;
+
+    @Autowired
+    CourseDao courseDao;
+
+    @Autowired
+    UserDao userDao;
+
+    @Autowired
+    ProfileDao profileDao;
 
     // ---> Get all
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public String showStudents(Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        List<Student> students = dao.getStudents();
+        List<Student> students = studentDao.getStudents();
         m.addAttribute("list", students);
         return "students";
     }
@@ -40,7 +53,7 @@ public class StudentsController {
     @RequestMapping(value = "/addstudent", method = RequestMethod.POST)
     public String addStudent (@ModelAttribute("student") Student student, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.add(student);
+        studentDao.add(student);
         return "redirect:/students";
     }
 
@@ -48,23 +61,26 @@ public class StudentsController {
     @RequestMapping(value = "/updatestudent/{id}", method = RequestMethod.GET)
     public String showUpdateStudent(@PathVariable int id, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        m.addAttribute("command", dao.getStudentById(id));
+        m.addAttribute("command", studentUserDao.getStudentUserById(id));
+        m.addAttribute("profiles", profileDao.getProfiles());
+        m.addAttribute("courses", courseDao.getCourses());
         return "updatestudent";
     }
 
     // ---> Update (POST)
     @RequestMapping(value = "/updatestudent", method = RequestMethod.POST)
-    public String updateStudent(@ModelAttribute("student") Student student, Model m) {
+    public String updateStudent(@ModelAttribute("student") StudentUserViewModel studentUser, Model m) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.update(student);
-        return "redirect:/students";
+
+        studentDao.update(student);
+        return "redirect:/users";
     }
 
     // ---> Delete
     @RequestMapping(value = "/deletestudent/{id}", method = RequestMethod.GET)
     public String deleteStudent(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
-        dao.delete(id);
+        studentDao.delete(id);
         return "redirect:/students";
     }
 }

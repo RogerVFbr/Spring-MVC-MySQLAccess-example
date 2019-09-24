@@ -25,8 +25,8 @@
                 <td>${su.profilename}</td>
                 <td>${su.birthdate}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/updateuser/${su.userid}"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="${pageContext.request.contextPath}/deleteuser/${su.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                    <a href="${pageContext.request.contextPath}/updatestudent/${su.studentid}"><i class="fa fa-fw fa-edit"></i></a>
+                    <a href="${pageContext.request.contextPath}/deletestudent/${su.studentid}"><i class="fa fa-fw fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>

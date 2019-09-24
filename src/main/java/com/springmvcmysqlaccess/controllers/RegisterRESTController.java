@@ -1,6 +1,7 @@
 package com.springmvcmysqlaccess.controllers;
 
 import com.springmvcmysqlaccess.dao.StudentDao;
+import com.springmvcmysqlaccess.dao.StudentUserDao;
 import com.springmvcmysqlaccess.dao.TeacherDao;
 import com.springmvcmysqlaccess.dao.UserDao;
 import com.springmvcmysqlaccess.models.*;
@@ -24,15 +25,10 @@ public class RegisterRESTController {
     StudentDao studentDao;
 
     @Autowired
-    TeacherDao teacherDao;
+    StudentUserDao studentUserDao;
 
-//    private static final String template = "Hello, %s!";
-//    private final AtomicLong counter = new AtomicLong();
-//
-//    @GetMapping("/greeting")
-//    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-//        return new Greeting(counter.incrementAndGet(), String.format(template, name));
-//    }
+    @Autowired
+    TeacherDao teacherDao;
 
     @PostMapping("/registerstudentapi")
     public List<String> registerStudent(@RequestBody StudentUserViewModel viewModel) {
@@ -44,6 +40,8 @@ public class RegisterRESTController {
         if (userByEmail != null) response.add("This e-mail address has already been taken.");
         if (userByEnrollment != null) response.add("This enrollment number has already been taken.");
         if (response.size() != 0) return response;
+
+//        studentUserDao.add(viewModel);
 
         User user = getUserFromViewModel(viewModel);
         int userId = ((BigInteger) userDao.add(user)).intValue();

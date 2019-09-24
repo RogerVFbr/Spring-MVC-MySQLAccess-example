@@ -31,9 +31,9 @@ OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala 
 3. Desenvolver aplicações com Java Persistence API e o framework Hibernate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-?? - A Aplicação entregue utiliza a API de Persistência Java para anotar classes como entidades?
+OK - A Aplicação entregue utiliza a API de Persistência Java para anotar classes como entidades?
 
-?? - A Aplicação mapeia relacionamentos entre entidades usando Hibernate, de modo coerente com seu
+OK - A Aplicação mapeia relacionamentos entre entidades usando Hibernate, de modo coerente com seu
      domínio e documentado conforme solicitado no enunciado?
 
 NAO - A aplicação implementa corretamente um CRUD em back-end (Criação, Recuperação, Atualização e Exclusão
