@@ -41,8 +41,6 @@ public class RegisterRESTController {
         if (userByEnrollment != null) response.add("This enrollment number has already been taken.");
         if (response.size() != 0) return response;
 
-//        studentUserDao.add(viewModel);
-
         User user = getUserFromViewModel(viewModel);
         int userId = ((BigInteger) userDao.add(user)).intValue();
         Student student = new Student();

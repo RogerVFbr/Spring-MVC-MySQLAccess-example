@@ -18,13 +18,18 @@
         </div>
 
         <div class="form-group" hidden>
-            <label for="teacherid">StudentID:</label>
+            <label for="teacherid">TeacherID:</label>
             <form:input path="teacherid" type="text" class="form-control" id="teacherid" required="required"/>
         </div>
 
         <div class="form-group" hidden>
             <label for="userid_fk">userid_fk:</label>
             <form:input path="userid_fk" type="text" class="form-control" id="userid_fk" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <form:input path="title" type="text" class="form-control" id="title" required="required"/>
         </div>
 
         <div class="form-group">

@@ -16,17 +16,16 @@
     <h2 style="margin-bottom: 20px">Students</h2>
 
     <table class="table table-striped">
-        <tr><th>Name</th><th>E-mail</th><th>Enrollment</th><th>Profile</th><th>Birthdate</th><th>Actions</th></tr>
+        <tr><th>Name</th><th>E-mail</th><th>Enrollment</th><th>Birthdate</th><th>Actions</th></tr>
         <c:forEach var="su" items="${studentUser}">
             <tr>
                 <td>${su.name}</td>
                 <td>${su.email}</td>
                 <td>${su.enrollment}</td>
-                <td>${su.profilename}</td>
                 <td>${su.birthdate}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/updatestudent/${su.studentid}"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="${pageContext.request.contextPath}/deleteuser/${su.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${su.userid_fk}"><i class="fa fa-fw fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>
@@ -44,30 +43,13 @@
                 <td>${tu.email}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/updateteacher/${tu.teacherid}"><i class="fa fa-fw fa-edit"></i></a>
-                    <a href="${pageContext.request.contextPath}/deleteuser/${tu.userid}"><i class="fa fa-fw fa-trash"></i></a>
+                    <a href="${pageContext.request.contextPath}/deleteuser/${tu.userid_fk}"><i class="fa fa-fw fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 
-<%--    <h2 style="margin-bottom: 20px">Users</h2>--%>
-
-<%--    <table class="table table-striped">--%>
-<%--        <tr><th>ID</th><th>Enrollment</th><th>Name</th><th>E-mail</th><th>Profile</th><th>Actions</th></tr>--%>
-<%--        <c:forEach var="user" items="${users}">--%>
-<%--            <tr>--%>
-<%--                <td>${user.userid}</td>--%>
-<%--                <td>${user.enrollment}</td>--%>
-<%--                <td>${user.name}</td>--%>
-<%--                <td>${user.email}</td>--%>
-<%--                <td>${user.profilename}</td>--%>
-<%--                <td>--%>
-<%--                    <a href="${pageContext.request.contextPath}/updateuser/${user.userid}"><i class="fa fa-fw fa-edit"></i></a>--%>
-<%--                    <a href="${pageContext.request.contextPath}/deleteuser/${user.userid}"><i class="fa fa-fw fa-trash"></i></a>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
+    </br></br></br>
 
 </div>
 

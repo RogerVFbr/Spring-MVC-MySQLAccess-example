@@ -36,7 +36,7 @@ OK - A Aplicação entregue utiliza a API de Persistência Java para anotar clas
 OK - A Aplicação mapeia relacionamentos entre entidades usando Hibernate, de modo coerente com seu
      domínio e documentado conforme solicitado no enunciado?
 
-NAO - A aplicação implementa corretamente um CRUD em back-end (Criação, Recuperação, Atualização e Exclusão
+OK - A aplicação implementa corretamente um CRUD em back-end (Criação, Recuperação, Atualização e Exclusão
      de Dados) usando Hibernate para pelo menos três classes do domínio?
 
 OK - O aluno resolveu no prazo, com excelência e louvor os exercícios em sala de aula (presencial ou virtual),
@@ -52,7 +52,6 @@ OK - A aplicação mapeia pelo menos um serviço web POST com arquitetura REST, 
 OK - A aplicação mapeia pelo menos um serviço web GET com arquitetura REST, permitindo que outras aplicações
      leiam dados dela?
 
-(Documentacao???)
 OK - Conforme o enunciado, foi entregue uma aplicação auxiliar RESTful que lê e grava dados na aplicação
      principal entregue no assessment? Também foi entregue uma documentação explicativa para outros desenvolvedores
      poderem criar aplicações que consumam a API?

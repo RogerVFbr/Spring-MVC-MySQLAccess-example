@@ -22,7 +22,7 @@ public class AuthController {
     public String checkCredentials (@ModelAttribute("user") User user, Model m) {
         String email = user.getEmail();
         String password = user.getPassword();
-        if (Auth.login(email, password)) return "redirect:/classes";
+        if (Auth.login(email, password)) return "redirect:/users";
         user.setPassword("");
         m.addAttribute("command", user);
         m.addAttribute("error", "Invalid credentials.");

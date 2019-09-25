@@ -13,7 +13,7 @@ public class TeacherUserViewModel extends User {
 
     public TeacherUserViewModel() {}
 
-    public TeacherUserViewModel(int teacherid, String title, Integer userid_fk, Integer userid, String name, int enrollment, String password, String email, int profileid_fk) {
+    public TeacherUserViewModel(int teacherid, String title, Integer userid_fk, int userid, String name, int enrollment, String password, String email, int profileid_fk) {
         this.teacherid = teacherid;
         this.title = title;
         this.userid_fk = userid_fk;
@@ -88,7 +88,7 @@ public class TeacherUserViewModel extends User {
     @Override
     public int getUserid() { return userid; }
 
-    public void setUserid(Integer userid) { this.userid = userid; }
+    public void setUserid(int userid) { this.userid = userid; }
 
     @Override
     public String toString() {

@@ -40,7 +40,6 @@ public class UsersController {
         if (!Auth.isLoggedIn()) return "redirect:/login";
         m.addAttribute("studentUser", studentUserDao.getStudentUsers());
         m.addAttribute("teacherUser", teacherUserDao.getTeacherUsers());
-        m.addAttribute("users", userDao.getUsers());
         return "users";
     }
 
@@ -82,11 +81,14 @@ public class UsersController {
     public String deleteUser(@PathVariable int id) {
         if (!Auth.isLoggedIn()) return "redirect:/login";
         Teacher teacher = teacherDao.getTeacherByUserId(id);
-        if (teacher != null) {
+        if (teacher == null) {
             Student student = studentDao.getStudentByUserId(id);
-            if (student != null) studentDao.delete(student.getStudentid());
+            if (student != null) {
+                studentDao.delete(student.getStudentid());
+            }
         }
         else {
+            System.out.println("teacher not null");
             teacherDao.delete(teacher.getTeacherid());
         }
         userDao.delete(id);

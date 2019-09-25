@@ -40,6 +40,7 @@ public class TeacherUserDao {
         teacherUser.setTeacherid(teacher.getTeacherid());
         teacherUser.setTitle(teacher.getTitle());
         teacherUser.setUserid_fk(teacher.getUserid_fk());
+        teacherUser.setUserid(teacher.getUserid_fk());
 
         User user = usersDb.getSingleItem(User.class, Res.USERS_TABLE_PK + "=" + teacher.getUserid_fk());
         teacherUser.setEnrollment(user.getEnrollment());

@@ -9,20 +9,26 @@
 <body>
 
 <div class="container" style="width: 40%; margin: 40px auto auto auto">
+
     <h2 style="margin-bottom: 20px">Register student</h2>
+
     <form:form method="post" action="${pageContext.request.contextPath}/registerstudent">
+
         <div class="form-group">
             <label for="name">Name:</label>
             <form:input path="name" type="text" class="form-control" id="name" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="enrollment">Enrollment:</label>
             <form:input path="enrollment" type="text" class="form-control" id="enrollment" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="birthdate">Birth date:</label>
             <form:input path="birthdate" type="text" class="form-control" id="birthdate" required="required"/>
         </div>
+
         <div class="form-group">
             <label for="pwd">Password:</label>
             <form:input path="password" type="password" class="form-control" id="pwd" required="required"/>
